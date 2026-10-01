@@ -19,78 +19,73 @@ Il garde tes clés en sécurité. C'est le porte-clés : ton adresse publique et
 Il t'affiche ton solde. Il va lire dans le grand cahier, la blockchain, combien de tokens sont notés à ton adresse, puis il te les montre.
 Il signe tes transactions. Quand tu veux envoyer des tokens, il utilise ta clé privée pour signer à ta place, sans que tu aies besoin de la manipuler toi-même.
 
-Semaine 1 : Comprendre et préparer
+3) Un smart contract est un programme deployé sur la blockchain, à une adresse precise, qui execute automatiquement
+ses règles et ne peut pkus être modifié une fois en ligne.
 
-Jour 1 : Les bases
+4) - Un token(monnaie inventée) est un smart contract qui respecte un standard (BEP-20 sur BNB Chain), cad une liste de fonctions communes
+qui permet à tous les wallets et explorers de le comprendre.
 
-Leçon 1 : la blockchain (en cours)
-Leçon 2 : les wallets et les clés
-Installer MetaMask et créer un compte réservé au test
-
-Jour 2 : Smart contracts et tokens
-
-Leçon 3 : les smart contracts
-Leçon 4 : les tokens et le standard BEP-20
-Choisir le nom et le ticker de ton token (avec « 42 »)
-
-Jour 3 : Le réseau de test
-
-Leçon 5 : testnet, mainnet et gas
-Ajouter BSC Testnet à MetaMask
-Récupérer des tBNB gratuits via le faucet
-Explorer BscScan Testnet pour se familiariser
-
-Jour 4 : Premiers pas en Solidity
-
-Apprendre les bases du langage : variables, fonctions, msg.sender, modifier
-Écrire un petit contrat d'entraînement dans Remix, un éditeur dans le navigateur
-
-Jour 5 : Premier token d'entraînement
-
-Créer et déployer un token test avec Remix sur le testnet
-Le voir sur BscScan et l'ajouter à MetaMask
-Objectif : comprendre le cycle complet avant de le refaire proprement
-
-Jour 6 : Les outils professionnels
-
-Leçon 6 : Hardhat, OpenZeppelin et npm
-Leçon 7 : la sécurité (ownership et privilèges)
-Installer Node.js et initialiser Hardhat dans le projet
+- Le standard BEP-20 c'est la liste des règles communes que tous les tokens respectent.- la blockchain est un registre public de toutes les transactions,
+ que tout le monde peut consulter, mais où les personnes sont identifiées par des adresses et non par leur nom.
 
 
-Semaine 2 : Construire le projet
+- La blockchain est un registre public où l'on voit toutes les transactions du réseau, identifiées par des adresses.
+ Le smart contract est un programme déployé sur cette blockchain qui gère le token : il garde les soldes et applique les règles.
+ Le token est la monnaie numérique que ce smart contract crée et qu'on peut s'échanger.
 
-Jour 8 : Le contrat
+- Respecter le standard BEP-20 garantit la compatibilité de mon token: comme il implemente les mêmes fonctions
+que tous les autres tokens, il est automatiquement reconnu par les wallets comme MetaMask, par les explorers comme 
+BscScan et par ;es applications de l'écosysteme BNB Chain.
 
-Écrire mon token dans code/ avec OpenZeppelin
-Commenter le code et choisir des noms explicites
+- MetaMask sert à agir sur la blockchain, BscScan sert à la consulter.
 
-Jour 9 : Les tests
+5) le testnet est une copie d'entraînement de la blockchain avec de la fausse monnaie, et le gas est le frais payé en BNB pour chaque opération
+ qui écrit sur la blockchain.
+- J'ai besoin de tBNB pour payer les frais de gas, car toute opération qui écrit sur la blockchain, comme le déploiement du contrat ou un transfert,
+ se paie avec la monnaie native du réseau. Comme je travaille sur le testnet, j'utilise des tBNB gratuits obtenus via le faucet, sans dépenser d'argent réel.
 
-Écrire des tests : transfert, approve/transferFrom, mint réservé à l'owner
-Vérifier que tout passe
+6) Solidity : langage de programmation dans lequel on écrit les smart contracts sur BNB Chain.
 
-Jour 10 : Le déploiement
+OpenZeppelin: une bibliothèque de smart contracts déjà écrits.
 
-Préparer le dossier deployment/, le fichier .env et le script de déploiement
-Déployer sur BSC Testnet
+Hardhat : l outil permettant de compiler le code , tester le contrat sur une fausse blockchain locale,
+instantanément et gratuitement ; déployer le contrat sur le testnet ;vérifier le code sur BscScan.
 
-Jour 11 : La publication
+Hardhat fonctionne grâce à Node.js. npm est l'outil qui télécharge et installe Hardhat et OpenZeppelin dans le projet.
+Tout ce qu'il télécharge va dans le dossier node_modules/, celui qu'on a mis dans le .gitignore.
 
-Vérifier le contrat sur BscScan (code source public)
-Noter l'adresse du contrat et le réseau dans le README
+--> j'écris mon token en Solidity, je m'appuie sur OpenZeppelin pour la sécurité, et j'utilise Hardhat pour compiler, tester et déployer.
 
-Jour 12 : La documentation
 
-Rédiger dans documentation/ un mini-whitepaper : ce que représente ton token et pourquoi
-Rédiger un guide d'utilisation : ajouter le token, transférer, fonctions disponibles
 
-Jour 13 : Le README et la relecture
+-----------------------------------
+Étape 1 : Préparer le wallet
+Installer MetaMask, ajouter BSC Testnet et récupérer des tBNB.
+→ Indispensable : sans wallet ni tBNB, impossible de déployer.
 
-Compléter le README avec tous les choix et leurs justifications
-Faire une code review
+Étape 2 : Choisir le nom et le ticker
+Le nom doit contenir « 42 ».
+→ Exigé par le sujet.
 
-Bonus 
-Leçon sur le multisig
-Implémenter un multisig qui contrôle les fonctions sensibles de ton token
-Le documenter et le tester
+Étape 3 : Écrire le smart contract dans code/
+Un token BEP-20, commenté, avec des noms explicites, et une gestion de l'ownership.
+→ Exigé par le sujet.
+
+Étape 4 : Préparer le déploiement dans deployment/
+Le script et la configuration pour déployer.
+→ Exigé par le sujet.
+
+Étape 5 : Déployer sur BSC Testnet et publier sur BscScan
+→ Exigé par le sujet.
+
+Étape 6 : Démontrer le fonctionnement
+Faire quelques actions simples (transfert, mint par l'owner, tentative refusée d'un non-owner), et savoir les refaire pendant l'évaluation.
+→ Exigé par le sujet.
+
+Étape 7 : Rédiger la documentation dans documentation/
+Ce que représente le token, comment il fonctionne, comment l'utiliser.
+→ Exigé par le sujet.
+
+Étape 8 : Compléter le README
+Tes choix et leurs raisons, l'adresse du contrat et le réseau.
+→ Exigé par le sujet.
