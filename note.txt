@@ -89,3 +89,7 @@ Ce que représente le token, comment il fonctionne, comment l'utiliser.
 Étape 8 : Compléter le README
 Tes choix et leurs raisons, l'adresse du contrat et le réseau.
 → Exigé par le sujet.
+
+--------
+
+Creer un smart contrat dans code/ en utilisant la librairie 
