@@ -1,0 +1,96 @@
+Qu'est-ce qu'une blockchain ?
+Les wallets et les clés
+Les smart contracts
+Les tokens et le standard BEP-20
+Testnet, mainnet et gas
+Les outils : Solidity, Hardhat, MetaMask
+La sécurité : ownership et privilèges
+
+--------------------------
+
+1) Une blockchain est un registre partagé entre des milliers d'ordinateurs.On ne peut pas falsifier une transaction,
+car chaque bloc est lié au précédent par un hash, et toutes les autres copies du registre contrediraient la modification.
+
+2) L'adresse publique sert à recevoir des tokens et à m'identifier sur la blockchain. La clé privée sert à signer mes transactions,
+c'est-à-dire à prouver que c'est bien moi qui les envoie. Celui qui possède la clé privée contrôle le compte.
+Mes tokens sont enregistrés sur la blockchain, à mon adresse. Mon wallet garde ma clé privée et me permet de signer des transactions.
+Le wallet, c'est une application, comme MetaMask, qui fait trois choses :
+Il garde tes clés en sécurité. C'est le porte-clés : ton adresse publique et ta clé privée sont rangées dedans.
+Il t'affiche ton solde. Il va lire dans le grand cahier, la blockchain, combien de tokens sont notés à ton adresse, puis il te les montre.
+Il signe tes transactions. Quand tu veux envoyer des tokens, il utilise ta clé privée pour signer à ta place, sans que tu aies besoin de la manipuler toi-même.
+
+Semaine 1 : Comprendre et préparer
+
+Jour 1 : Les bases
+
+Leçon 1 : la blockchain (en cours)
+Leçon 2 : les wallets et les clés
+Installer MetaMask et créer un compte réservé au test
+
+Jour 2 : Smart contracts et tokens
+
+Leçon 3 : les smart contracts
+Leçon 4 : les tokens et le standard BEP-20
+Choisir le nom et le ticker de ton token (avec « 42 »)
+
+Jour 3 : Le réseau de test
+
+Leçon 5 : testnet, mainnet et gas
+Ajouter BSC Testnet à MetaMask
+Récupérer des tBNB gratuits via le faucet
+Explorer BscScan Testnet pour se familiariser
+
+Jour 4 : Premiers pas en Solidity
+
+Apprendre les bases du langage : variables, fonctions, msg.sender, modifier
+Écrire un petit contrat d'entraînement dans Remix, un éditeur dans le navigateur
+
+Jour 5 : Premier token d'entraînement
+
+Créer et déployer un token test avec Remix sur le testnet
+Le voir sur BscScan et l'ajouter à MetaMask
+Objectif : comprendre le cycle complet avant de le refaire proprement
+
+Jour 6 : Les outils professionnels
+
+Leçon 6 : Hardhat, OpenZeppelin et npm
+Leçon 7 : la sécurité (ownership et privilèges)
+Installer Node.js et initialiser Hardhat dans le projet
+
+
+Semaine 2 : Construire le projet
+
+Jour 8 : Le contrat
+
+Écrire mon token dans code/ avec OpenZeppelin
+Commenter le code et choisir des noms explicites
+
+Jour 9 : Les tests
+
+Écrire des tests : transfert, approve/transferFrom, mint réservé à l'owner
+Vérifier que tout passe
+
+Jour 10 : Le déploiement
+
+Préparer le dossier deployment/, le fichier .env et le script de déploiement
+Déployer sur BSC Testnet
+
+Jour 11 : La publication
+
+Vérifier le contrat sur BscScan (code source public)
+Noter l'adresse du contrat et le réseau dans le README
+
+Jour 12 : La documentation
+
+Rédiger dans documentation/ un mini-whitepaper : ce que représente ton token et pourquoi
+Rédiger un guide d'utilisation : ajouter le token, transférer, fonctions disponibles
+
+Jour 13 : Le README et la relecture
+
+Compléter le README avec tous les choix et leurs justifications
+Faire une code review
+
+Bonus 
+Leçon sur le multisig
+Implémenter un multisig qui contrôle les fonctions sensibles de ton token
+Le documenter et le tester
