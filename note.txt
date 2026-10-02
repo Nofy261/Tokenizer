@@ -189,3 +189,86 @@ Tokenizer/
 ├── code/              ← le smart contract (.sol)
 ├── deployment/        ← ce qu'il faut pour déployer (script ou instructions Remix)
 └── documentation/     ← comment fonctionne le token et comment l'utiliser
+
+---------
+
+Un token à supply fixe, sans owner et sans aucun privilège.
+
+INITIAL_SUPPLY * 10 ** decimals() = 1 000 000 × 10 puissance 18.
+Ça veut dire « 1 million de tokens, écrits en petites unités ».
+MetaMask fait la division tout seul et affichera simplement 1 000 000 NF42.
+
+« On utilise 18 décimales car :
+c'est la valeur par défaut d'OpenZeppelin ;
+c'est la convention suivie par BNB, ETH et la plupart des tokens BEP-20 ;
+les wallets et les applications s'attendent à 18, donc c'est la meilleure compatibilité ;
+ça permet de diviser le token en très petites parts. »
+
+----------
+
+Remix, c'est quoi ?
+C'est un éditeur de code pour smart contracts.
+Sert a :
+-> Écrire le code Solidity.
+-> Compiler ce code.
+-> Déployer le contrat : soit sur une fausse blockchain pour tester, soit sur une vraie (avec MetaMask).
+
+Remix fabrique les bytecodes(suite de chiffre et de lettre)
+Remix fabrique, MetaMask signe et envoie, la blockchain enregistre.
+--------
+
+Écrire le code → Compiler → Tester(fausse blockchain) → Déployer(BSC Testnet) → Publier sur BscScan
+----
+
+*Creer le wallet , y mettre des tBNB
+*ecrire le code de smart contract
+*tester le contrat dans Remix:
+--> Aller a https://remix.ethereum.org.
+--> Dans le panneau de gauche (l'explorateur de fichiers), crée un nouveau fichier nofy42.sol.
+--> Coller le contenu du fichier code/nofy42.sol
+--> Compiler(Remix) le solidity -> on obtient le bytecode (Solidity compiler) 
+--> deployer(deploy & run transaction) sur la fausse blockchain de Remix pour le tester gratuitement(TESTS)
+*déployer sur le BSC Testnet
+
+
+
+
+---------
+-> 1 NF42 = 1 suivi de 18 zéros miettes, soit 1 000 000 000 000 000 000.
+
+uint256 = un nombre entier positif, qui peut être très grand. C'est le type standard pour les soldes en Solidity
+
+--------
+Ton token est déployé sur le BSC Testnet:
+
+Adresse du contrat : 0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754
+Réseau : BNB Smart Chain Testnet (Chain ID 97)
+Adresse qui a déployé (ton MetaMask) : 0x30E60e59368fe5bFB6AED7431980ed6366543b4d
+Version du compilateur : 0.8.34
+Optimisation : regarde dans l'onglet Solidity Compiler si « Optimization » est coché ou non, et note-le.
+
+les réglages à noter pour BscScan :
+
+Compiler : v0.8.34+commit.80d5c536
+Optimization : No (désactivée)
+EVM version : osaka
+Licence : MIT
+
+
+la page publique du contrat sur BscScan.
+https://testnet.bscscan.com/address/0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754
+
+publier ton code source sur BscScan (on dit « vérifier le contrat »)
+
+--------------------
+
+Réseau MetaMask : ajouter le réseau BNB Smart Chain Testnet (Chain ID 97) dans MetaMask, car les réseaux personnalisés sont enregistrés sur l'ordi et pas dans les 12 mots.
+Écriture du contrat : écrire en Solidity un smart contract qui hérite de l'ERC20 d'OpenZeppelin (identique à BEP-20), avec le nom « Nofy42 Token », le ticker NF42 et 18 décimales.
+Choix de sécurité : créer 1 million de NF42 une seule fois dans le constructor et les donner à celui qui déploie, sans owner ni privilège, pour que personne ne puisse en créer d'autres ni bloquer quelqu'un.
+Compilation : compiler le contrat dans Remix (version 0.8.34) pour le transformer en bytecode compréhensible par la blockchain.
+Tests gratuits dans la Remix VM : vérifier name, symbol, decimals, totalSupply et balanceOf, puis tester transfer, le refus d'un transfert sans solde suffisant, et approve + transferFrom.
+Déploiement sur le BSC Testnet : déployer le contrat avec Remix + MetaMask en payant le gas en tBNB, et récupérer son adresse 0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754.
+Réglages de compilation : noter compiler v0.8.34+commit.80d5c536, optimisation désactivée, EVM osaka, licence MIT.
+Vérification sur BscScan : publier et vérifier le code source (« Exact Match »), pour que tout le monde puisse le lire et voir qu'il correspond au contrat déployé.
+Import dans MetaMask : ajouter le jeton personnalisé avec l'adresse du contrat, pour voir les 1 000 000 NF42 dans le wallet.
+----------
