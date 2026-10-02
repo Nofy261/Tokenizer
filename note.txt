@@ -92,4 +92,100 @@ Tes choix et leurs raisons, l'adresse du contrat et le réseau.
 
 --------
 
+Wallet crée
+adresse -> 0x30E60e59368fe5bFB6AED7431980ed6366543b4d
+solde -> 0,0100 tBNB
+
+Nom du réseau : BNB Smart Chain Testnet
+URL RPC : par ex. https://data-seed-prebsc-1-s1.binance.org:8545/
+ID de chaîne : 97
+Symbole : tBNB
+Explorateur de blocs (facultatif) : https://testnet.bscscan.com
+
+
+--------------
 Creer un smart contrat dans code/ en utilisant la librairie 
+
+1. C'est quoi un smart contract ?
+C'est un programme déployé sur la blockchain. Il a quelques particularités :
+
+Une fois déployé, il a sa propre adresse (comme le wallet) et on ne peut plus modifier son code.
+Il garde un état (des variables stockées sur la blockchain, par exemple qui possède combien de tokens).
+Tout le monde peut appeler ses fonctions. Lire est gratuit. Écrire, c'est-à-dire modifier l'état, coûte du gas, payé en tBNB.
+C'est à ça que servent les 0.01 tBNB.
+Le code est public, donc n'importe qui peut chercher une faille. D'où l'importance de la sécurité.
+BSC est compatible EVM (la même machine virtuelle qu'Ethereum). L'écrire en Solidity, comme sur Ethereum
+
+2. C'est quoi un token BEP-20 ?
+Un token n'est pas une pièce qui se déplace. C'est juste un smart contract qui contient un registre :
+
+adresse A → 1000
+adresse B → 250
+« Envoyer des tokens », c'est appeler une fonction qui fait -50 sur A et +50 sur B dans ce registre.
+
+BEP-20 (l'équivalent d'ERC-20 sur Ethereum) est un standard : une liste de fonctions que le contrat doit avoir.
+Comme ça, MetaMask, BscScan et les exchanges savent tous comment lui parler.
+
+3. Les briques Solidity à connaître
+À retenir : mapping, msg.sender, constructor, require, modifier, event/emit.
+Avec ça,on peut écrire un BEP-20.
+
+4. La sécurité (!!!)
+
+Qui est l'owner et quels pouvoirs a-t-il ?
+Peut-on créer (mint) de nouveaux tokens après le déploiement ? Si oui, qui ? Supply fixe ou pas ?
+Que se passe-t-il si quelqu'un envoie plus qu'il ne possède, ou envoie vers l'adresse 0x0 ?
+Peut-on transférer ou renoncer à l'ownership ?
+
+5 - Utiliser OpenZeppelin 
+
+-----------
+résumé du projet :
+Écrire un smart contract = mon token (qui respecte BEP-20, avec « 42 » dans le nom).
+Le déployer sur le BSC Testnet.
+Le documenter.
+
+"coder un BEP-20", ça veut dire écrire un smart contract qui respecte la norme BEP-20
+
+--> ecrire dasn le smart contract les fonctions que la norme exige avec les noms et
+parametres attendus selon le sujet.
+Si toutes les fonctions sont là et se comporte comme prévu, mon contrat est un token BEP-20. Metamask et
+BscScan le reconnaitront et pourront l'utiliser.
+A la fin cela devient un programme qui tourne sur la blockchain cad quand on le deploie , le code est envoyé
+sur la blockchain et reçoit une adresse. Ensuite n'importe qui peut appeler ses fonctions, par ex quand qqun
+m'envoie mes tokens. 
+-La blockchainest un grand registre public partagé par des milliers d'ordi dnas le monde. Il contient:
+--> des wallets(comme le mien)
+--> des smart contracts: des milliers de token comme le mien, des exchanges, ...
+--> l'historique de toutes les transactions.
+On utilise le BSC Testnet(Chain ID 97). C'est une copie de BSC faite pour les tests, où l'argent n'a aucune valeur.
+C'est pour ça que les tBNB sont gratuits.
+
+
+MetaMask = mon portefeuille, et ma « télécommande » vers la blockchain.
+Il garde ma clé privée (les 12 mots) et montre ce que je possède.
+Quand je veux faire une action sur la blockchain (déployer mon contrat, envoyer des tokens), c'est MetaMask qui signe l'action et paie le gas avec mes tBNB.
+Dans le projet, il sert à déployer mon contrat depuis Remix, puis à afficher et envoyer mes tokens.
+
+BscScan = un site pour regarder ce qu'il y a sur la blockchain.
+C'est comme un moteur de recherche de la blockchain : tu tapes une adresse et tu vois les soldes, les transactions, les contrats.
+Dans le projet, tu y publies le code de ton contrat (demande par le sujet). Le correcteur pourra le voir et l'utiliser publiquement.
+Pour le testnet : https://testnet.bscscan.com
+En résumé : MetaMask pour agir, BscScan pour regarder.
+
+Le cycle complet du projet :
+
+Écrire le contrat (Solidity)  →  Compiler  →  Déployer sur BSC Testnet  →  Vérifier sur BscScan
+       (Remix)                    (Remix)       (Remix + MetaMask, paie du gas)   (public, visible par tous)
+
+-----------
+
+OpenZeppelin s'appelle « ERC20 », pas « BEP20 »
+C'est normal. BEP-20 est une copie exacte d'ERC-20 (mêmes fonctions, mêmes noms), adaptée à BSC.
+Le contrat ERC20 d'OpenZeppelin respecte donc BEP-20.
+
+Tokenizer/
+├── README.md          ← les choix et pourquoi (blockchain, OpenZeppelin, supply...) + adresse du contrat + réseau
+├── code/              ← le smart contract (.sol)
+├── deployment/        ← ce qu'il faut pour déployer (script ou instructions Remix)
+└── documentation/     ← comment fonctionne le token et comment l'utiliser
