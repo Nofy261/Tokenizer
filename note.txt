@@ -272,3 +272,67 @@ Réglages de compilation : noter compiler v0.8.34+commit.80d5c536, optimisation 
 Vérification sur BscScan : publier et vérifier le code source (« Exact Match »), pour que tout le monde puisse le lire et voir qu'il correspond au contrat déployé.
 Import dans MetaMask : ajouter le jeton personnalisé avec l'adresse du contrat, pour voir les 1 000 000 NF42 dans le wallet.
 ----------
+
+Version avec option Owner(celui qui deploie devient l'owner) et privilege
+// SPDX-License-Identifier: MIT
+// -> licence du code (MIT = tout le monde peut le réutiliser)
+pragma solidity ^0.8.20;
+// -> version de Solidity : 0.8.20 ou plus (minimum pour OpenZeppelin v5)
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+// -> toutes les fonctions BEP-20 (transfer, balanceOf, approve...)
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol";
+// -> ajoute la possibilité de mettre le token "en pause" (bloquer tous les transferts)
+import "@openzeppelin/contracts/access/Ownable.sol";
+// -> ajoute la notion d'owner (propriétaire) et le modifier onlyOwner
+
+// Le contrat hérite de 3 contrats OpenZeppelin :
+// ERC20 = le token, ERC20Pausable = la pause, Ownable = l'owner
+contract Nofy42TokenWithOwner is ERC20, ERC20Pausable, Ownable {
+
+    // Exécuté une seule fois au déploiement
+    // ERC20(...)          -> donne le nom et le ticker
+    // Ownable(msg.sender) -> celui qui déploie devient l'OWNER (c'est la différence avec mon contrat)
+    constructor() ERC20("Nofy42 Token", "NF42") Ownable(msg.sender) {
+        // crée 1 million de NF42 (en miettes) et les donne à celui qui déploie
+        _mint(msg.sender, 1_000_000 * 10 ** decimals());
+    }
+
+    // PRIVILÈGE 1 : créer des tokens quand on veut
+    // "public"    -> tout le monde peut essayer de l'appeler de l'extérieur
+    // "onlyOwner" -> mais seul l'owner passe, les autres sont refusés (OwnableUnauthorizedAccount)
+    // C'est une "porte publique" vers _mint (qui est interne)
+    // -> la supply n'est plus fixe : l'owner peut créer autant de NF42 qu'il veut
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
+    }
+
+    // PRIVILÈGE 2 : bloquer TOUS les transferts de tout le monde
+    // après pause(), tout transfer / transferFrom est refusé (EnforcedPause)
+    function pause() public onlyOwner {
+        _pause();
+    }
+
+    // débloque les transferts (seul l'owner peut le faire)
+    function unpause() public onlyOwner {
+        _unpause();
+    }
+
+    // Obligation technique (pas un privilège) :
+    // _update est la fonction interne appelée à CHAQUE mouvement de tokens (transfer, mint...).
+    // ERC20 et ERC20Pausable ont tous les deux une version de _update,
+    // donc Solidity oblige à dire qu'on combine les deux (override(ERC20, ERC20Pausable)).
+    // super._update(...) exécute les deux : la vérification "est-ce en pause ?" puis le transfert.
+    function _update(address from, address to, uint256 value)
+        internal
+        override(ERC20, ERC20Pausable)
+    {
+        super._update(from, to, value);
+    }
+}
+
+// RÉSUMÉ de la différence avec mon contrat (nofy42.sol) :
+// - mon contrat : pas de Ownable, pas de Pausable, pas de fonction mint publique
+//   -> pas d'owner, supply fixe, personne ne peut bloquer les transferts (même pas moi)
+// - ce contrat : l'owner peut créer des tokens et bloquer tout le monde
+//   -> les utilisateurs doivent faire confiance à l'owner

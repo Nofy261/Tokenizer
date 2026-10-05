@@ -191,6 +191,25 @@ testnet) :
    `allowance` = 20, le compte 4 a 30 NF42.
 
 ---
+
+## 7. Déployer le token
+
+Le token se déploie avec **Remix IDE** et **MetaMask**, sans installation :
+
+1. Ajouter le réseau **BNB Smart Chain Testnet** dans MetaMask et obtenir des
+   tBNB sur le faucet.
+2. Ouvrir https://remix.ethereum.org et coller le contenu de
+   [`../code/nofy42.sol`](../code/nofy42.sol).
+3. Compiler avec la version `0.8.34` (onglet **Solidity Compiler**).
+4. Onglet **Deploy & run transactions** : Environment **Browser extension →
+   MetaMask**, contrat `Nofy42Token`, puis **Deploy** et confirmer dans MetaMask.
+5. Vérifier le code source sur BscScan, puis ajouter le token dans MetaMask
+   avec l'adresse du contrat.
+
+L'adresse qui déploie reçoit les 1 000 000 NF42. Les étapes détaillées et les
+réglages de compilation sont dans [`../deployment/README.md`](../deployment/README.md).
+
+---
 ---
 
 > English version
@@ -376,3 +395,22 @@ Scenario to show how the token works (in the Remix VM or on the testnet):
 5. `approve(account3, 50 NF42)` from the deployer → `allowance` = 50.
 6. From account 3, `transferFrom(deployer, account4, 30 NF42)` →
    `allowance` = 20, account 4 has 30 NF42.
+
+---
+
+## 7. Deploying the token
+
+The token is deployed with **Remix IDE** and **MetaMask**, with no installation:
+
+1. Add the **BNB Smart Chain Testnet** network to MetaMask and get tBNB from
+   the faucet.
+2. Open https://remix.ethereum.org and paste the content of
+   [`../code/nofy42.sol`](../code/nofy42.sol).
+3. Compile with version `0.8.34` (**Solidity Compiler** tab).
+4. **Deploy & run transactions** tab: Environment **Browser extension →
+   MetaMask**, contract `Nofy42Token`, then **Deploy** and confirm in MetaMask.
+5. Verify the source code on BscScan, then add the token to MetaMask with the
+   contract address.
+
+The deployer address receives the 1,000,000 NF42. Detailed steps and compiler
+settings are in [`../deployment/README.md`](../deployment/README.md).

@@ -43,6 +43,9 @@ Le code source est vérifié et publié sur BscScan (*Exact Match*).
 - Les frais (gas) sont faibles, et le **testnet** permet de tout faire avec des
   tBNB gratuits obtenus sur le faucet. Le sujet interdit d'utiliser de l'argent
   réel.
+- Autres plateformes possibles : Ethereum (frais plus élevés), Polygon
+  (compatible EVM aussi) ou Solana (langage Rust, outils différents) ; BSC
+  offre le meilleur équilibre entre simplicité, coût et documentation.
 
 ### Standard : BEP-20
 - C'est la norme des tokens sur BNB Chain, exigée par le sujet.
@@ -147,6 +150,9 @@ The source code is verified and published on BscScan (*Exact Match*).
   tools as Ethereum.
 - Fees (gas) are low, and the **testnet** lets everything be done with free
   tBNB from the faucet. The subject forbids using real money.
+- Other possible platforms: Ethereum (higher fees), Polygon (also
+  EVM-compatible) or Solana (Rust language, different tools); BSC offers the
+  best balance between simplicity, cost and documentation.
 
 ### Standard: BEP-20
 - It is the token standard on BNB Chain, required by the subject.
