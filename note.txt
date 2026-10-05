@@ -336,3 +336,95 @@ contract Nofy42TokenWithOwner is ERC20, ERC20Pausable, Ownable {
 //   -> pas d'owner, supply fixe, personne ne peut bloquer les transferts (même pas moi)
 // - ce contrat : l'owner peut créer des tokens et bloquer tout le monde
 //   -> les utilisateurs doivent faire confiance à l'owner
+
+-------------------
+
+1- Aller dans Metamask , installer sous firefox
+2- Dans le protefeuille MetaMAsk , ajouter un reseau perso:
+-> Nom: BNB Smart Chain Testnet 
+-> URL RPC : https://data-seed-prebsc-1-s1.binance.org:8545/
+-> ID de chaîne : 97
+-> Symbole : tBNB
+-> Explorateur de blocs : https://testnet.bscscan.com
+
+--------------
+
+Creer un Smart Contract -> 1 million de NF42
+Ecrire,compiler,Tester le contrat dans Remix  
+Deployer le contrat sur la blockchain BSC Tesnet avec Remix en trois etapes:
+-> Avant : dans MetaMask, choisir le réseau BNB Smart Chain Testnet(la préparation: où envoyer).
+-> Dans Remix : cliquer sur Deploy (prépare l'envoi du contrat).
+-> Dans MetaMask : cliquer sur Confirmer(Le déploiement a coûté du gas, payé en tBNB depuis le wallet,signe et paie les frais en tBNB).
+
+Adresse du porte feuille : mon nom sur la blockchain (0x30E60e59368fe5bFB6AED7431980ed6366543b4d)
+Adresse de mon contrat NF42 : mon token, le programme qui tient le registre des NF42(0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754)
+(Le registre du contrat contient la ligne:«l'adresse 0x30E6... possède 1 000 000 NF42»)
+
+Les tokens sont deja sur le blockchain BSC Testnet mais il faut les Afficher dans MetaMask -> Ajouter l'adresse du contrat dans MetaMask
+
+Test dsn MetaMask : 
+-> Ajouter un compte pour faire un transfert
+
+---------------------
+
+CONTEXTE — Projet Tokenizer (école 42) — à lire avant de m'aider
+
+QUI JE SUIS / COMMENT M'AIDER
+- Étudiante/étudiant à 42, je découvre la blockchain : le but est que J'APPRENNE et que je COMPRENNE.
+- Réponds en français, en phrases simples.
+- Une seule tâche / une seule idée à la fois, réponses courtes. Trop d'infos d'un coup m'embrouille.
+- Pour chaque étape : dis d'abord POURQUOI on la fait et à quoi elle sert dans le projet, puis les actions.
+- Indique pour chaque tâche si je devrai la REFAIRE pendant la correction.
+- N'écris pas mon code à ma place sans que je le demande. Les exemples concrets de comparaison
+  (ex. "le même contrat AVEC owner/mint/pause") m'aident beaucoup à comprendre.
+
+LE SUJET (résumé)
+Créer un token avec "42" dans le nom, conforme au standard de la blockchain (BEP-20 sur BSC),
+déployé sur un testnet (jamais d'argent réel) et publié sur un explorateur (BscScan).
+Repo attendu : README.md (choix + raisons + adresse du contrat + réseau), code/ (contrat commenté),
+deployment/ (comment déployer), documentation/ (fonctionnement + utilisation + déploiement).
+BONUS : un multisig (plusieurs signatures requises), lié au token, visible sur l'explorateur,
+avec une section dans la documentation. Le bonus n'est évalué que si le mandatory est parfait.
+
+ÉTAT : PARTIE OBLIGATOIRE TERMINÉE ✅
+- Token : "Nofy42 Token", ticker NF42, 18 décimales, supply FIXE de 1 000 000 NF42.
+- Contrat : code/nofy42.sol — Solidity ^0.8.20, hérite de ERC20 d'OpenZeppelin (identique à BEP-20).
+  Le constructor appelle _mint une seule fois (1 000 000 NF42 donnés au déployeur).
+- Choix de sécurité : AUCUN owner (pas de Ownable), aucun privilège (pas de mint public, pas de pause,
+  pas de blacklist). Personne ne peut créer de NF42 ni bloquer quelqu'un, même pas moi.
+- Réseau : BNB Smart Chain Testnet (Chain ID 97).
+- Adresse du contrat : 0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754
+- Mon wallet (Account 1, déployeur) : 0x30E60e59368fe5bFB6AED7431980ed6366543b4d
+- Account 2 (MetaMask, mêmes 12 mots) : 0xbdfa6E96...C7fC1c2B5 (possède 10 NF42)
+- Compilation : v0.8.34+commit.80d5c536, optimisation désactivée, EVM osaka, licence MIT.
+- Déployé avec Remix + MetaMask. Vérifié sur BscScan (Exact Match), Token Tracker visible.
+- Tests faits : dans la Remix VM (name, symbol, decimals, totalSupply, balanceOf, transfer,
+  transfer refusé si solde insuffisant -> ERC20InsufficientBalance, approve, allowance, transferFrom)
+  ET en vrai sur le testnet (transfer de 10 NF42 Account 1 -> Account 2 depuis MetaMask,
+  lecture totalSupply/balanceOf dans BscScan "Read Contract").
+- Fichiers écrits (français + anglais) : README.md, deployment/README.md, documentation/README.md.
+- Il me reste environ 0,009 tBNB (faucet : https://www.bnbchain.org/en/testnet-faucet).
+
+À SAVOIR (nouvel ordi)
+Sur chaque nouvel ordi : installer MetaMask depuis metamask.io -> "Importer un portefeuille existant"
+(12 mots) -> ajouter le réseau manuellement (RPC https://data-seed-prebsc-1-s1.binance.org:8545/,
+Chain ID 97, symbole tBNB, explorateur https://testnet.bscscan.com) -> ajouter le jeton personnalisé
+avec l'adresse du contrat -> recréer Account 2 si besoin.
+
+PROCHAINE ÉTAPE : LE BONUS (multisig), pas encore commencé
+Plan : 1) comprendre + faire les choix  2) écrire le contrat multisig dans code/
+3) tester dans la Remix VM  4) déployer sur BSC Testnet + vérifier sur BscScan
+5) ajouter une section multisig dans documentation/ (et le README).
+Idée retenue : un contrat "coffre" séparé qui détient une réserve de NF42 ; 3 gardiens
+(Account 1, 2, 3) ; 2 signatures sur 3 pour sortir des NF42 ; fonctions proposer / confirmer /
+exécuter ; à l'exécution, le coffre appelle transfer() sur mon contrat NF42.
+On en était à valider ce choix (3 gardiens / 2 signatures).
+Attention : un multisig "squelette" qui compte des votes mais ne déplace rien ne suffit pas,
+il doit vraiment transférer des NF42. Les gardiens auront besoin d'un peu de tBNB pour payer le gas.
+
+RÉVISIONS PRÉVUES APRÈS LE BONUS (pour la correction)
+Redéployer le token avec Remix devant le correcteur, faire un transfert dans MetaMask,
+montrer la transaction sur BscScan, utiliser Read/Write Contract, expliquer la sécurité
+(pas d'owner, supply fixe) et pourquoi les fonctions BEP-20 ne sont pas écrites dans mon code
+(héritées d'OpenZeppelin, visibles dans les fichiers du contrat sur BscScan).
+
