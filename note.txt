@@ -367,6 +367,11 @@ Test dsn MetaMask :
 
 ---------------------
 
+BONUS:
+
+
+----------------------
+
 CONTEXTE — Projet Tokenizer (école 42) — à lire avant de m'aider
 
 QUI JE SUIS / COMMENT M'AIDER
