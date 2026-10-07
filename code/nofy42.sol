@@ -31,12 +31,3 @@ contract Nofy42Token is ERC20 {
         _mint(msg.sender, INITIAL_SUPPLY * 10 ** decimals());
     }
 }
-
-/**
-* OpenZeppelin est une bibliothèque de code déjà écrit, vérifié et utilisé par des milliers de projets.
-* Au lieu de réécrire toutes les fonctions du standard toi-même (avec un risque d'erreur), tu les récupères toutes faites.
-* BEP-20 et ERC-20, c'est la même chose, donc ça marche sur BNB Chain.
-* import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-*/
-
-contract Nofy42Token is ERC20 {

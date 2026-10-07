@@ -78,17 +78,20 @@ automatiquement par 10¹⁸ pour afficher un nombre lisible.
 
 ### Les fonctions BEP-20
 
-| Fonction | Type | Rôle |
-|---|---|---|
-| `name()` | lecture | Renvoie le nom du token : `Nofy42 Token` |
-| `symbol()` | lecture | Renvoie le ticker : `NF42` |
-| `decimals()` | lecture | Renvoie le nombre de décimales : `18` |
-| `totalSupply()` | lecture | Renvoie le nombre total de tokens (en unités) |
-| `balanceOf(adresse)` | lecture | Renvoie le solde d'une adresse (en unités) |
-| `transfer(to, montant)` | écriture | Envoie des tokens de l'appelant vers `to` |
-| `approve(spender, montant)` | écriture | Autorise `spender` à dépenser jusqu'à `montant` des tokens de l'appelant |
-| `allowance(owner, spender)` | lecture | Renvoie le montant que `spender` peut encore dépenser pour `owner` |
-| `transferFrom(from, to, montant)` | écriture | Le `spender` autorisé envoie des tokens de `from` vers `to` |
+> **Lecture** : consulter une information sans modifier la blockchain
+> (par exemple, un solde). La consultation dans Remix ou BscScan est gratuite.
+> **Écriture** : modifier une information sur la blockchain (par exemple,
+> transférer des tokens). Il faut signer avec son wallet et payer du gas en tBNB.
+
+- `name()` (**lecture**) : Renvoie le nom du token : `Nofy42 Token`.
+- `symbol()` (**lecture**) : Renvoie le ticker : `NF42`.
+- `decimals()` (**lecture**) : Renvoie le nombre de décimales : `18`.
+- `totalSupply()` (**lecture**) : Renvoie le nombre total de tokens (en unités).
+- `balanceOf(adresse)` (**lecture**) : Renvoie le solde d'une adresse (en unités).
+- `transfer(to, montant)` (**écriture**) : Envoie des tokens de l'appelant vers `to`.
+- `approve(spender, montant)` (**écriture**) : Autorise `spender` à dépenser jusqu'à `montant` des tokens de l'appelant.
+- `allowance(owner, spender)` (**lecture**) : Renvoie le montant que `spender` peut encore dépenser pour `owner`.
+- `transferFrom(from, to, montant)` (**écriture**) : Le `spender` autorisé envoie des tokens de `from` vers `to`.
 
 Les fonctions de **lecture** sont gratuites. Les fonctions d'**écriture**
 coûtent du gas (en tBNB).
@@ -210,6 +213,13 @@ L'adresse qui déploie reçoit les 1 000 000 NF42. Les étapes détaillées et l
 réglages de compilation sont dans [`../deployment/README.md`](../deployment/README.md).
 
 ---
+
+## 8. Bonus — MultiSig
+
+Le fonctionnement du coffre multisignature, la configuration **2 sur 3**
+et les étapes de démonstration sont expliqués dans la
+[documentation du bonus](../bonus/README.md).
+
 ---
 
 > English version
@@ -291,17 +301,20 @@ divide by 10¹⁸ to display a readable number.
 
 ### BEP-20 functions
 
-| Function | Type | Purpose |
-|---|---|---|
-| `name()` | read | Returns the token name: `Nofy42 Token` |
-| `symbol()` | read | Returns the ticker: `NF42` |
-| `decimals()` | read | Returns the number of decimals: `18` |
-| `totalSupply()` | read | Returns the total number of tokens (in units) |
-| `balanceOf(address)` | read | Returns the balance of an address (in units) |
-| `transfer(to, amount)` | write | Sends tokens from the caller to `to` |
-| `approve(spender, amount)` | write | Allows `spender` to spend up to `amount` of the caller's tokens |
-| `allowance(owner, spender)` | read | Returns how much `spender` can still spend for `owner` |
-| `transferFrom(from, to, amount)` | write | The approved `spender` sends tokens from `from` to `to` |
+> **Read**: look up information without changing the blockchain
+> (for example, a balance). Reading in Remix or BscScan is free.
+> **Write**: change information on the blockchain (for example, transfer
+> tokens). You must sign with your wallet and pay gas in tBNB.
+
+- `name()` (**read**) : Returns the token name: `Nofy42 Token`.
+- `symbol()` (**read**) : Returns the ticker: `NF42`.
+- `decimals()` (**read**) : Returns the number of decimals: `18`.
+- `totalSupply()` (**read**) : Returns the total number of tokens (in units).
+- `balanceOf(address)` (**read**) : Returns the balance of an address (in units).
+- `transfer(to, amount)` (**write**) : Sends tokens from the caller to `to`.
+- `approve(spender, amount)` (**write**) : Allows `spender` to spend up to `amount` of the caller's tokens.
+- `allowance(owner, spender)` (**read**) : Returns how much `spender` can still spend for `owner`.
+- `transferFrom(from, to, amount)` (**write**) : The approved `spender` sends tokens from `from` to `to`.
 
 **Read** functions are free. **Write** functions cost gas (in tBNB).
 
@@ -414,3 +427,13 @@ The token is deployed with **Remix IDE** and **MetaMask**, with no installation:
 
 The deployer address receives the 1,000,000 NF42. Detailed steps and compiler
 settings are in [`../deployment/README.md`](../deployment/README.md).
+
+---
+
+## 8. Bonus — MultiSig
+
+The multisignature vault, the **2 out of 3** configuration and the
+demonstration steps are explained in the
+[bonus documentation](../bonus/README.md).
+
+---
