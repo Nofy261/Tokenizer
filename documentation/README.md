@@ -17,17 +17,15 @@ C'est un **token pédagogique** : il sert à démontrer la création, le
 déploiement et l'utilisation d'un token sur une blockchain publique. Il n'a
 **aucune valeur financière** (il vit sur un testnet).
 
-| Caractéristique | Valeur |
-|---|---|
-| Nom | Nofy42 Token |
-| Ticker (symbole) | NF42 |
-| Standard | BEP-20 (identique à ERC-20) |
-| Décimales | 18 |
-| Supply totale | 1 000 000 NF42 (fixe) |
-| Réseau | BNB Smart Chain Testnet (Chain ID `97`) |
-| Adresse du contrat | `0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754` |
-| Explorateur | https://testnet.bscscan.com/address/0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754 |
-| Code source | [`../code/nofy42.sol`](../code/nofy42.sol) |
+- **Nom :** Nofy42 Token
+- **Ticker (symbole) :** NF42
+- **Standard :** BEP-20
+- **Décimales :** 18
+- **Supply totale :** 1 000 000 NF42 (fixe)
+- **Réseau :** BNB Smart Chain Testnet (Chain ID `97`)
+- **Adresse du contrat :** `0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754`
+- **Explorateur :** [Voir le contrat sur BscScan](https://testnet.bscscan.com/address/0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754)
+- **Code source :** [nofy42.sol](../code/nofy42.sol)
 
 ---
 
@@ -240,17 +238,15 @@ It is an **educational token**: it demonstrates how to create, deploy and use
 a token on a public blockchain. It has **no financial value** (it lives on a
 testnet).
 
-| Property | Value |
-|---|---|
-| Name | Nofy42 Token |
-| Ticker (symbol) | NF42 |
-| Standard | BEP-20 (identical to ERC-20) |
-| Decimals | 18 |
-| Total supply | 1,000,000 NF42 (fixed) |
-| Network | BNB Smart Chain Testnet (Chain ID `97`) |
-| Contract address | `0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754` |
-| Explorer | https://testnet.bscscan.com/address/0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754 |
-| Source code | [`../code/nofy42.sol`](../code/nofy42.sol) |
+- **Name:** Nofy42 Token
+- **Ticker (symbol):** NF42
+- **Standard:** BEP-20
+- **Decimals:** 18
+- **Total supply:** 1,000,000 NF42 (fixed)
+- **Network:** BNB Smart Chain Testnet (Chain ID `97`)
+- **Contract address:** `0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754`
+- **Explorer:** [View the contract on BscScan](https://testnet.bscscan.com/address/0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754)
+- **Source code:** [nofy42.sol](../code/nofy42.sol)
 
 ---
 
@@ -434,6 +430,6 @@ settings are in [`../deployment/README.md`](../deployment/README.md).
 
 The multisignature vault, the **2 out of 3** configuration and the
 demonstration steps are explained in the
-[bonus documentation](../bonus/README.md).
+[bonus documentation]
 
 ---

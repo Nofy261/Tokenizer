@@ -9,16 +9,14 @@ token **BEP-20** sur une blockchain publique de test.
 
 ## Le token
 
-| | |
-|---|---|
-| Nom | Nofy42 Token |
-| Ticker | NF42 |
-| Standard | BEP-20 |
-| Supply | 1 000 000 NF42 (fixe) |
-| Décimales | 18 |
-| Réseau | **BNB Smart Chain Testnet** (Chain ID `97`) |
-| Adresse du contrat | **`0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754`** |
-| BscScan | https://testnet.bscscan.com/address/0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754 |
+- **Nom :** Nofy42 Token
+- **Ticker :** NF42
+- **Standard :** BEP-20
+- **Supply :** 1 000 000 NF42 (fixe)
+- **Décimales :** 18
+- **Réseau :** BNB Smart Chain Testnet (Chain ID `97`)
+- **Adresse du contrat :** `0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754`
+- **BscScan :** [Voir le contrat](https://testnet.bscscan.com/address/0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754)
 
 Le code source est vérifié et publié sur BscScan (*Exact Match*).
 
@@ -117,16 +115,14 @@ token on a public test blockchain.
 
 ## The token
 
-| | |
-|---|---|
-| Name | Nofy42 Token |
-| Ticker | NF42 |
-| Standard | BEP-20 |
-| Supply | 1,000,000 NF42 (fixed) |
-| Decimals | 18 |
-| Network | **BNB Smart Chain Testnet** (Chain ID `97`) |
-| Contract address | **`0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754`** |
-| BscScan | https://testnet.bscscan.com/address/0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754 |
+- **Name:** Nofy42 Token
+- **Ticker:** NF42
+- **Standard:** BEP-20
+- **Supply:** 1,000,000 NF42 (fixed)
+- **Decimals:** 18
+- **Network:** BNB Smart Chain Testnet (Chain ID `97`)
+- **Contract address:** `0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754`
+- **BscScan:** [View the contract](https://testnet.bscscan.com/address/0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754)
 
 The source code is verified and published on BscScan (*Exact Match*).
 

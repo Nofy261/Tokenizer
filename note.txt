@@ -595,4 +595,41 @@ Execute → ça réussit. Le destinataire reçoit les 100 NF42 et le solde du mu
 Tests en plus de la démo :(facultatif)
 confirmer deux fois avec le même compte → refusé ;
 appeler propose depuis un compte qui n'est pas owner → refusé ;
-exécuter deux fois la même transaction → refusé.
+exécuter deux fois la même transaction → refusé
+
+------------------------------------
+
+Correction :
+Mandatory Part
+
+Readme.md:
+1) J'ai choisi BSC Testnet car Tesnet permet d'apprendre et de tester sans depenser d'argent réel.
+-> BSC est compatible avec Solidity et les outils que j'utilise(Remix, Metamask).
+
+BSC = blockchain publique: un reseau partagé qui enregistre des comptes, des smarts contracts et des transactions.
+
+📝 Écrire le smart contract
+   Fichier nofy42.sol, langage Solidity
+                │
+                ▼
+🔧 Compiler dans Remix
+   Traduire le code pour la blockchain
+                │
+                ▼
+🚀 Demander le déploiement dans Remix(Remix demande à MetaMask d’envoyer la transaction)
+                │
+                ▼
+🦊 Confirmer dans MetaMask (MetaMask signe la transaction, puis l’envoie à BSC Testnet)
+   Signer la transaction et payer le gas en tBNB
+                │
+                ▼
+🌐 BSC Testnet
+   Le contrat est déployé et reçoit une adresse.
+   Il enregistre les soldes de NF42.
+                │
+                ▼
+🔎 Consulter sur BscScan (affiche les informations enregistrées sur BSC Testnet)
+   Voir le contrat, les soldes et les transactions
+
+
+Pour envoyer des NF42 : tu demandes le transfert → MetaMask signe → BSC Testnet l’exécute → BscScan permet de le consulter.
