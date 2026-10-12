@@ -32,7 +32,7 @@ Le code source est vérifié et publié sur BscScan (*Exact Match*).
 
 ---
 
-## Choix et justifications
+## Choix 
 
 ### Blockchain : BNB Smart Chain (Testnet)
 - Le sujet est réalisé en partenariat avec BNB Chain.
