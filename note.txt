@@ -599,14 +599,13 @@ exécuter deux fois la même transaction → refusé
 
 ------------------------------------
 
-Correction :
-Mandatory Part
-
-Readme.md:
-1) J'ai choisi BSC Testnet car Tesnet permet d'apprendre et de tester sans depenser d'argent réel.
--> BSC est compatible avec Solidity et les outils que j'utilise(Remix, Metamask).
-
 BSC = blockchain publique: un reseau partagé qui enregistre des comptes, des smarts contracts et des transactions.
+un contrat = programme qui gere le token , sa quantite , les soldes et les transferts. 
+Ici NF42 = le token et Nofy42Token = le programme qui le fait focntionner sur la blockchain.
+BEP-20 : les règles que le token doit respecter sur BSC.
+ERC20 d’OpenZeppelin : le code réutilisable qui fournit les fonctions nécessaires pour respecter ces règles.
+
+
 
 📝 Écrire le smart contract
    Fichier nofy42.sol, langage Solidity
@@ -633,3 +632,17 @@ BSC = blockchain publique: un reseau partagé qui enregistre des comptes, des sm
 
 
 Pour envoyer des NF42 : tu demandes le transfert → MetaMask signe → BSC Testnet l’exécute → BscScan permet de le consulter.
+-----------------------------
+
+Correction :
+Mandatory Part
+
+Readme.md:
+1) J'ai choisi BSC Testnet car Tesnet permet d'apprendre et de tester sans depenser d'argent réel mais aussi 
+pour découvrir l’écosystème BNB Chain présenté dans le sujet.
+-> BSC est compatible avec Solidity et les outils que j'utilise(Remix, Metamask) tout comme Ethereum et Polygon.
+
+2) Solidity car il est adapté aux smart contrat sur BSC , focntionne avec Remix et permet d'utiliser openzeppelin
+sur laquelle repose mon token.
+
+
