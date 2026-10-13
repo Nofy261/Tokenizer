@@ -603,6 +603,8 @@ BSC = blockchain publique: un reseau partagé qui enregistre des comptes, des sm
 un contrat = programme qui gere le token , sa quantite , les soldes et les transferts. 
 Ici NF42 = le token et Nofy42Token = le programme qui le fait focntionner sur la blockchain.
 BEP-20 : les règles que le token doit respecter sur BSC.
+BEP-20 est une règle de compatibilité des tokens.
+BEP-20 définit des règles communes pour que les wallets et les applications sachent utiliser les tokens de la même façon.
 ERC20 d’OpenZeppelin : le code réutilisable qui fournit les fonctions nécessaires pour respecter ces règles.
 
 
@@ -637,12 +639,44 @@ Pour envoyer des NF42 : tu demandes le transfert → MetaMask signe → BSC Test
 Correction :
 Mandatory Part
 
-Readme.md:
+***Readme.md:
 1) J'ai choisi BSC Testnet car Tesnet permet d'apprendre et de tester sans depenser d'argent réel mais aussi 
 pour découvrir l’écosystème BNB Chain présenté dans le sujet.
 -> BSC est compatible avec Solidity et les outils que j'utilise(Remix, Metamask) tout comme Ethereum et Polygon.
 
-2) Solidity car il est adapté aux smart contrat sur BSC , focntionne avec Remix et permet d'utiliser openzeppelin
-sur laquelle repose mon token.
+2) Solidity car il est adapté aux smart contrat sur BSC , focntionne avec Remix et permet de reutiliser le contrat ERC-20 d'openzeppelin.
+
+3) Montrer et expliquer la structure du projet:
+-code/ : mon contrat Solidity qui crée et gère le token NF42.
+-deployment/ : les étapes pour compiler et déployer le contrat.
+-documentation/ : le fonctionnement du token et comment l’utiliser.
+-README.md à la racine : la présentation du projet, mes choix et leurs raisons, ainsi que la structure du dépôt.
+
+
+
+***Documentation : 
+
+1) Comment fonctionne le projet:
+Creer -> Tester -> Deployer.
+Au deploiement , le contrat crée un million de NF42 pour le déployeur , puis conserve les soldes et
+applique les règles des transferts. Personne ne peut creér de NF42 supplémentaires.
+
+
+2) Les actions possibles avec le token crées:
+- Consulter le nom name() , le symbole symbol(), les decimales decimals() et la quantite totale totalSupply()
+- Consulter le solde d'une adresse balanceOf(adresse)
+- Transferer(ou donner) des NF42 a qqun transfer(to, amount)
+- Autoriser une adresse à depenser un montant limité de ses tokens approve(spender, amount) (donne seulement une autorisation mais n'envoie aucun token)
+- consulter l'autorisation restante allowance(owner, spender)
+- utiliser l'autorisation pour transferer les tokens transferFrom(from, to, amount)
+
+
+3) Comment deployer le token
+Je prépare MetaMask sur BSC Testnet avec des tBNB. Je compile le contrat Solidity dans Remix et je le teste dans Remix VM.
+Ensuite, je connecte Remix à MetaMask et je clique sur Deploy. Je confirme dans MetaMask, qui signe et envoie la transaction.
+Une fois celle-ci exécutée, le contrat est déployé sur BSC Testnet et reçoit une adresse.
+
+***Code review :
+
 
 
