@@ -678,5 +678,77 @@ Une fois celle-ci exécutée, le contrat est déployé sur BSC Testnet et reçoi
 
 ***Code review :
 
+1) Explication du code:
+
+-> SPDX-License-Identifier: MIT
+Cette ligne indique que mon code est sous licence MIT : les autres peuvent le copier, le modifier et le partager en conservant les mentions de licence.
+C’est une bonne pratique, mais son absence n’empêche pas la compilation ni le fonctionnement du contrat.
+
+-> On importe le fichier du contrat ERC20 d'OpenZeppelin
+--> contract Nofy42Token is ERC20{}
+Je crée mon contrat Nofy42Token qui herite du contrat ERC20 d'OpenZeppelin pour recuperer les fonctions de gestion
+du token sans les réecrire.
+
+-> uint256 private constant INITIAL_SUPPLY = 1_000_000;
+Je definis une quantite initiale fixe d'un million de tokens, utlisée à l'interieur de mon contrat.
+
+Le constructeur créer 1Millions de NF42 une seule fois par deploiement grace a _mint()
+-> _mint(msg.sender, INITIAL_SUPPLY * 10 ** decimals());
+Je crée un million de NF42 et je l'attribue a msg.sender(le compte qui deploie le contrat depuis remix)
+10^18 = 18 decimales une convention courante, permet de representer des fractions: 1 NF42 = 10^18 petites unités
+C'est la valeur par défaut d'OpenZeppelin et une convention courante pour les tokens.
+
+Les fonctions heritées d’ERC20 d’OpenZeppelin sont:
+-> name() , symbol(), decimals()
+-> totalSupply() : consulter la quantité totale
+-> balanceOf(adresse) : consulter le solde d'une adresse
+-> transfer(to, amount) : envoyer mes tokens
+-> approve(spender, amount) : autoriser une adresse à depenser mes tokens jusqu a un montant.
+-> allowance(owner, spender) : consulter l'autorisation restante
+-> transferFrom(from, to, amount) : transferer des tokens en utilisant une autorisation
+-> _mint : fct interne d'openzeppelin qui creer des tokens et les attribue à une adresse.
+
+2) Comment fonctionne les tokens:
+-> Au deploiement, mon contrat crée un million de NF42 et les attribue au deployeur. Il enregistre ensuite le solde de
+chaque adresse. Grâce aux fonctions herités d'OpenZeppelin , on peut consulter les soldes et transférer des NF42.
+A chaque transfert reussi, les soldes de l'expéditeur et du destinataire sont mis à jour. 
+
+3) *La securité du token:
+Mon contrat herite des protections d'OpenZeppelin:
+-> Soldes insuffisant : transfert refusé
+-> Destinataire à l'adresse zéro : transfert refusé
+-> transferFrom : verification de l'autorisation de dépense et de solde.
+
+*L'ownership = fait de désigner un propriétaire administrateur du contrat.
+Selon le code cet administrateur peut avoir des privileges (Ex: Creer de nouveaux tokens, suspendre les transferts)
+
+Dans mon contrat NF42, il n'y a pas d'owner ( pas d'administrateur)
+Le deployeur reçoit le un million de NF42, mais cela ne lui donne aucun pouvoir special sur le contrat.
+
+*Privilège = quels pouvoirs speciaux existent? 
+Ici aucun , personne ne peut creer davantage de tokens, suspendre les transferts ou confisquer des soldes.
+
+-> Dans mon contrat le deployeur reçoit les tokens mais n'a aucun pouvoir special sur le contrat.
+Mon contrat n’a aucun owner ni privilège administratif. J’ai fait ce choix pour que personne, même le déployeur, ne puisse créer de nouveaux NF42,
+bloquer les transferts ou confisquer des tokens. La quantité reste fixe et les règles sont les mêmes pour tous.
+
+-> Les fonctions presenté dans la documentation(balanceOf, transfer, approve) ne sont pas réecrites dans mon fichier
+car elles sont heritées d'OpenZeppelin.(voir dans ERC20.col dans Remix)
+
+***Deployment review :
+
+Etape de deploiement :
+1- Preparer Metamask et le reseau
+2- Obtenir des tBNB
+3- Charger le code dans Remix
+4- compiler
+5- Tester dans Remix VM 
+6- Deployer sur BSC Testnet
+7- Verifier sur BscScan
+8- Ajouter NF42 dans Metamask
+
+
+
+
 
 

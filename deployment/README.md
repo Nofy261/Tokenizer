@@ -11,46 +11,20 @@ locale n'est nécessaire.
 
 ---
 
-## Contrat déployé
-
-| Élément | Valeur |
-|---|---|
-| Réseau | BNB Smart Chain Testnet (Chain ID `97`) |
-| Adresse du contrat | `0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754` |
-| Adresse du déployeur | `0x30E60e59368fe5bFB6AED7431980ed6366543b4d` |
-| Explorateur | https://testnet.bscscan.com/address/0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754 |
-| Code source | [`../code/nofy42.sol`](../code/nofy42.sol) |
-| Vérification | Vérifié sur BscScan (Exact Match) |
-
----
-
-## Réglages de compilation
-
-Ces réglages doivent être repris à l'identique pour vérifier le contrat sur BscScan.
-
-| Réglage | Valeur |
-|---|---|
-| Compilateur | `v0.8.34+commit.80d5c536` |
-| Optimisation | Désactivée |
-| Version EVM | `osaka` |
-| Licence | MIT |
-
----
-
 ## Prérequis
 
 ### 1. MetaMask avec le réseau BSC Testnet
 
-Installer l'extension MetaMask, puis ajouter le réseau manuellement
+Si MetaMask et le réseau sont déjà configurés, ne pas les recréer : vérifier
+les paramètres ci-dessous. Sinon, installer l'extension MetaMask, créer
+un portefeuille (ou importer un portefeuille existant), puis ajouter le réseau manuellement
 (*Ajouter un réseau → Ajouter un réseau manuellement*) :
 
-| Champ | Valeur |
-|---|---|
-| Nom du réseau | BNB Smart Chain Testnet |
-| URL RPC | `https://data-seed-prebsc-1-s1.binance.org:8545/` |
-| ID de chaîne | `97` |
-| Symbole | `tBNB` |
-| Explorateur de blocs | `https://testnet.bscscan.com` |
+- **Nom du réseau :** BNB Smart Chain Testnet
+- **URL RPC :** `https://data-seed-prebsc-1-s1.binance.org:8545/`
+- **ID de chaîne :** `97`
+- **Symbole :** `tBNB`
+- **Explorateur de blocs :** `https://testnet.bscscan.com`
 
 > Les réseaux personnalisés sont enregistrés dans le navigateur, pas dans la
 > phrase secrète. Il faut les rajouter sur chaque nouvel ordinateur.
@@ -77,6 +51,8 @@ Remix télécharge automatiquement l'import OpenZeppelin.
 
 1. Ouvrir l'onglet **Solidity Compiler**.
 2. Choisir la version de compilateur `0.8.34`.
+   Dans **Advanced Configurations**, pour reproduire le déploiement documenté, désactiver l'optimisation et
+   sélectionner la version EVM `osaka` (voir les réglages en fin de document).
 3. Cliquer sur **Compile nofy42.sol**. Une coche verte indique la réussite.
 
 ### 3. (Facultatif) Tester gratuitement dans la Remix VM
@@ -112,7 +88,7 @@ S'il n'est pas vérifié :
    `nofy42_flattened.sol`, un seul fichier qui inclut le code d'OpenZeppelin.
 2. Ouvrir `https://testnet.bscscan.com/verifyContract?a=<ADRESSE_DU_CONTRAT>`
 3. Compiler type : *Solidity (Single file)*, version du compilateur et licence
-   selon le tableau ci-dessus.
+   selon les réglages indiqués en fin de document.
 4. Coller le code aplati, mettre Optimization sur *No* et EVM version sur
    `osaka`, puis valider.
 
@@ -122,6 +98,31 @@ S'il n'est pas vérifié :
 2. Coller l'adresse du contrat. Le symbole `NF42` et les décimales `18` se
    remplissent automatiquement.
 3. Le compte déployeur affiche **1 000 000 NF42**.
+
+
+---
+
+## Référence — Contrat déjà déployé
+
+- **Réseau :** BNB Smart Chain Testnet (Chain ID `97`)
+- **Adresse du contrat :** `0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754`
+- **Adresse du déployeur :** `0x30E60e59368fe5bFB6AED7431980ed6366543b4d`
+- **Explorateur :** https://testnet.bscscan.com/address/0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754
+- **Code source :** [`../code/nofy42.sol`](../code/nofy42.sol)
+- **Vérification :** Vérifié sur BscScan (Exact Match)
+
+---
+
+## Réglages de compilation
+
+Ces réglages doivent être repris à l'identique pour vérifier le contrat sur BscScan.
+
+- **Compilateur :** `v0.8.34+commit.80d5c536`
+- **Optimisation :** Désactivée
+- **Version EVM :** `osaka`
+- **Licence :** MIT
+
+---
 
 ---
 ---
@@ -139,46 +140,20 @@ Deployment is done with **Remix IDE** (to compile and deploy) and **MetaMask**
 
 ---
 
-## Deployed contract
-
-| Item | Value |
-|---|---|
-| Network | BNB Smart Chain Testnet (Chain ID `97`) |
-| Contract address | `0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754` |
-| Deployer address | `0x30E60e59368fe5bFB6AED7431980ed6366543b4d` |
-| Explorer | https://testnet.bscscan.com/address/0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754 |
-| Source code | [`../code/nofy42.sol`](../code/nofy42.sol) |
-| Verification status | Verified on BscScan (Exact Match) |
-
----
-
-## Compiler settings
-
-These settings must be reused exactly to verify the contract on BscScan.
-
-| Setting | Value |
-|---|---|
-| Compiler | `v0.8.34+commit.80d5c536` |
-| Optimization | Disabled |
-| EVM version | `osaka` |
-| License | MIT |
-
----
-
 ## Prerequisites
 
 ### 1. MetaMask with the BSC Testnet network
 
-Install the MetaMask browser extension, then add the network manually
+If MetaMask and the network are already configured, do not recreate them:
+check the settings below. Otherwise, install the MetaMask browser extension,
+create a wallet (or import an existing wallet), then add the network manually
 (*Add network → Add a network manually*):
 
-| Field | Value |
-|---|---|
-| Network name | BNB Smart Chain Testnet |
-| RPC URL | `https://data-seed-prebsc-1-s1.binance.org:8545/` |
-| Chain ID | `97` |
-| Currency symbol | `tBNB` |
-| Block explorer | `https://testnet.bscscan.com` |
+- **Network name :** BNB Smart Chain Testnet
+- **RPC URL :** `https://data-seed-prebsc-1-s1.binance.org:8545/`
+- **Chain ID :** `97`
+- **Currency symbol :** `tBNB`
+- **Block explorer :** `https://testnet.bscscan.com`
 
 > Custom networks are stored locally in the browser, not in the recovery
 > phrase. They must be added again on every new computer.
@@ -205,6 +180,8 @@ Remix downloads the OpenZeppelin import automatically.
 
 1. Open the **Solidity Compiler** tab.
 2. Select compiler version `0.8.34`.
+   In **Advanced Configurations**, to reproduce the documented deployment, disable optimization and select
+   EVM version `osaka` (see the settings at the end of this document).
 3. Click **Compile nofy42.sol**. A green check mark means success.
 
 ### 3. (Optional) Test for free in the Remix VM
@@ -240,7 +217,7 @@ If it is not verified:
    `nofy42_flattened.sol`, a single file including the OpenZeppelin code.
 2. Open `https://testnet.bscscan.com/verifyContract?a=<CONTRACT_ADDRESS>`
 3. Compiler type: *Solidity (Single file)*, compiler version and license from
-   the table above.
+   the settings listed at the end of this document.
 4. Paste the flattened code, set Optimization to *No* and EVM version to
    `osaka`, then submit.
 
@@ -250,3 +227,28 @@ If it is not verified:
 2. Paste the contract address. Symbol `NF42` and decimals `18` are filled in
    automatically.
 3. The deployer account shows **1,000,000 NF42**.
+
+---
+
+## Reference — Previously deployed contract
+
+- **Network :** BNB Smart Chain Testnet (Chain ID `97`)
+- **Contract address :** `0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754`
+- **Deployer address :** `0x30E60e59368fe5bFB6AED7431980ed6366543b4d`
+- **Explorer :** https://testnet.bscscan.com/address/0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754
+- **Source code :** [`../code/nofy42.sol`](../code/nofy42.sol)
+- **Verification status :** Verified on BscScan (Exact Match)
+
+---
+
+## Compiler settings
+
+These settings must be reused exactly to verify the contract on BscScan.
+
+- **Compiler :** `v0.8.34+commit.80d5c536`
+- **Optimization :** Disabled
+- **EVM version :** `osaka`
+- **License :** MIT
+
+---
+
