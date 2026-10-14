@@ -747,6 +747,9 @@ Etape de deploiement :
 7- Verifier sur BscScan
 8- Ajouter NF42 dans Metamask
 
+Voir le readme dans deployment/ pour les details.
+
+
 
 
 

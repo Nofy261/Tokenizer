@@ -47,15 +47,19 @@ Environ `0.01 tBNB` suffit pour déployer le contrat et faire quelques transfert
 
 Remix télécharge automatiquement l'import OpenZeppelin.
 
+**Version d'OpenZeppelin : à relever dans les dépendances du déploiement
+initial.** L'import actuel ne fixe aucune version. Pour reproduire ce
+déploiement, conserver les mêmes fichiers de dépendances et noter leur
+version exacte ; ne pas supposer que la dernière version est celle utilisée.
+
 ### 2. Compiler
 
 1. Ouvrir l'onglet **Solidity Compiler**.
 2. Choisir la version de compilateur `0.8.34`.
-   Dans **Advanced Configurations**, pour reproduire le déploiement documenté, désactiver l'optimisation et
-   sélectionner la version EVM `osaka` (voir les réglages en fin de document).
+   Dans **Advanced Configurations**, pour reproduire le déploiement documenté, désactiver l'optimisation et sélectionner la version EVM `osaka` (voir les réglages en fin de document).
 3. Cliquer sur **Compile nofy42.sol**. Une coche verte indique la réussite.
 
-### 3. (Facultatif) Tester gratuitement dans la Remix VM
+### 3. Tester(Facultatif) gratuitement dans la Remix VM
 
 1. Ouvrir l'onglet **Deploy & run transactions**.
 2. Environment : **Remix VM**.
@@ -69,18 +73,33 @@ Rien n'est dépensé : ce sont de faux comptes sur une blockchain locale simulé
 1. Dans MetaMask, sélectionner le réseau **BNB Smart Chain Testnet**.
 2. Dans Remix, onglet **Deploy & run transactions**, choisir Environment
    **Browser extension → MetaMask**, et accepter la connexion dans MetaMask.
-3. Vérifier que le compte affiché dans Remix est bien l'adresse MetaMask.
+3. Vérifier que le compte affiché dans Remix(adresse account1) est bien l'adresse MetaMask.
 4. Contract : `Nofy42Token`. Cliquer sur **Deploy**.
 5. Confirmer la transaction dans MetaMask (le gas est payé en tBNB).
-6. Copier l'adresse du contrat affichée sous **Deployed Contracts**.
+6. Attendre que la transaction soit confirmée avec succès sur BSC Testnet,
+   puis copier l'adresse du contrat affichée sous **Deployed Contracts**.
+7. Dans MetaMask, ouvrir **Activité**, sélectionner la transaction de
+   déploiement (elle peut apparaître comme **Interaction avec un contrat**),
+   puis cliquer sur **Afficher sur l'explorateur de blocs**.
+8. Sur BscScan, vérifier que **Status** affiche **Success** et que
+   **Transaction Action** indique **Contract Created at** avec la nouvelle
+   adresse du contrat. Cela confirme la réussite du déploiement ; la
+   vérification du code source est une étape distincte, décrite ci-dessous.
 
 L'adresse qui déploie reçoit toute la supply : **1 000 000 NF42**.
 
+Chaque déploiement crée une nouvelle instance du contrat, avec une nouvelle
+adresse et son propre million de NF42. Pour les étapes suivantes, utiliser
+**l'adresse obtenue lors de ce déploiement**, pas l'adresse de référence en
+fin de document. L'ancien contrat reste inchangé.
+
 ### 5. Vérifier le code source sur BscScan
 
-Les versions récentes de Remix vérifient le contrat automatiquement après le
-déploiement. Pour le confirmer, ouvrir la page du contrat : l'onglet **Contract**
-doit afficher *Source Code Verified (Exact Match)*.
+Remix peut demander la vérification au déploiement si l'option
+**Verify Contract on Explorers** est cochée avant de cliquer sur **Deploy**
+et si le service de vérification est correctement configuré. La vérification
+n'est pas garantie : ouvrir la page de la nouvelle adresse sur BscScan et
+vérifier que l'onglet **Contract** affiche *Source Code Verified (Exact Match)*.
 
 S'il n'est pas vérifié :
 
@@ -176,6 +195,11 @@ About `0.01 tBNB` is enough to deploy the contract and make a few transfers.
 
 Remix downloads the OpenZeppelin import automatically.
 
+**OpenZeppelin version: to be identified from the original deployment's
+dependencies.** The current import does not pin a version. To reproduce
+that deployment, keep the same dependency files and record their exact
+version; do not assume the latest version was the one used.
+
 ### 2. Compile
 
 1. Open the **Solidity Compiler** tab.
@@ -201,14 +225,29 @@ Nothing is spent: these are fake accounts on a local, simulated blockchain.
 3. Check that the account shown in Remix is your MetaMask address.
 4. Contract: `Nofy42Token`. Click **Deploy**.
 5. Confirm the transaction in MetaMask (gas is paid in tBNB).
-6. Copy the contract address shown under **Deployed Contracts**.
+6. Wait for the transaction to be successfully confirmed on BSC Testnet,
+   then copy the contract address shown under **Deployed Contracts**.
+7. In MetaMask, open **Activity**, select the deployment transaction
+   (it may appear as **Contract interaction**), then click **View on block
+   explorer**.
+8. On BscScan, check that **Status** shows **Success** and **Transaction
+   Action** shows **Contract Created at** with the new contract address.
+   This confirms successful deployment; source code verification is a
+   separate step, described below.
 
 The deployer address receives the whole supply: **1,000,000 NF42**.
 
+Each deployment creates a new contract instance, with a new address and its
+own million NF42. For the following steps, use **the address obtained from
+this deployment**, not the reference address at the end of this document.
+The previous contract remains unchanged.
+
 ### 5. Verify the source code on BscScan
 
-Recent versions of Remix verify the contract automatically after deployment.
-Check it on the contract page: the **Contract** tab must show
+Remix can request verification during deployment if **Verify Contract on
+Explorers** is checked before clicking **Deploy** and the verification
+service is configured correctly. Verification is not guaranteed: open the
+new address on BscScan and check that the **Contract** tab shows
 *Source Code Verified (Exact Match)*.
 
 If it is not verified:
