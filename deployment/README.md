@@ -26,8 +26,8 @@ un portefeuille (ou importer un portefeuille existant), puis ajouter le réseau 
 - **Symbole :** `tBNB`
 - **Explorateur de blocs :** `https://testnet.bscscan.com`
 
-> Les réseaux personnalisés sont enregistrés dans le navigateur, pas dans la
-> phrase secrète. Il faut les rajouter sur chaque nouvel ordinateur.
+> Sur un nouvel ordinateur, si BNB Smart Chain Testnet n'apparaît pas dans
+> MetaMask, ajoute ce réseau à nouveau.
 
 ### 2. Des BNB de test (tBNB) pour payer le gas
 
@@ -174,8 +174,8 @@ create a wallet (or import an existing wallet), then add the network manually
 - **Currency symbol :** `tBNB`
 - **Block explorer :** `https://testnet.bscscan.com`
 
-> Custom networks are stored locally in the browser, not in the recovery
-> phrase. They must be added again on every new computer.
+> On a new computer, if BNB Smart Chain Testnet does not appear in MetaMask,
+> add this network again.
 
 ### 2. Test BNB (tBNB) to pay the gas
 

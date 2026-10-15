@@ -749,6 +749,23 @@ Etape de deploiement :
 
 Voir le readme dans deployment/ pour les details.
 
+***Blockchain explorer :
+
+-Aller sur BscScan testnet puis dans la barre de recherche y mettre l'adresse du deployeur et chercher le nouveau contrat deployé
+-Montrer l'adresse du nouveau contrat puis le reseau (lURL dans le navigateur)
+
+Dans contract -> Read contract:
+-> ticker : symbol : NF42
+-> name : Nofy42 Token
+-> L'explorateur : BscScan permet de consulter ce qui est enregistré sur la blockchain(contrats, soldes et transactions)
+Voir Read Contract : lire les infos 
+Voir Write Contract : Appeler des fonctions...
+
+Test:
+dans la barre de recherche copier l adresse du nouveau contrat
+dans read contract : balanceof : copier l adresse de account1 de metamask et query 
+
+
 
 
 
