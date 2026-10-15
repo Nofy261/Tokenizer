@@ -757,15 +757,40 @@ Voir le readme dans deployment/ pour les details.
 Dans contract -> Read contract:
 -> ticker : symbol : NF42
 -> name : Nofy42 Token
--> L'explorateur : BscScan permet de consulter ce qui est enregistré sur la blockchain(contrats, soldes et transactions)
-Voir Read Contract : lire les infos 
+-> L'explorateur : BscScan permet de consulter les infos enregistré sur la blockchain(contrats, soldes et transactions)
+Voir Read Contract : lire les infos sans payer de gas
 Voir Write Contract : Appeler des fonctions...
 
 Test:
 dans la barre de recherche copier l adresse du nouveau contrat
 dans read contract : balanceof : copier l adresse de account1 de metamask et query 
 
+Faire les tests en demontrant les fonctions de Read Contract 
 
+Test avec les focntions de Write contract
+-> Cliquer sur connect Wallet puis confirmer
+-> verifier dans bscScan a la place de Connect Wallet l'adresse connecté
+-> Approve:(autorise account2 à depenser value(50*10^18) de account1)
+spender = adresse de account2
+value = 50000000000000000000 (50 suivie de 18 zeros)
+->Cliquer sur write puis confirmer dans metamask
+->Verifier dans metamask le status succes en allant dans Activite et regarder le dernier operation
+->From adresse de account1 (il demande l operation)
+->To adresse contrat(2)!!! et NON account2!!!(Le contrat recoit la demande et enregistre l autorisation)
+->Dans Read contract verifie dans allowance le resulat doit etre 50*10^18
+
+En resume : Account1(les tokens lui appartienent) donne l'autorisation à Account2 
+Le contrat NF42 enregistre cette decision puis verifie qu Account2 respecte les limites
+
+Account 1 décide d’autoriser ; le contrat enregistre et applique sa décision.
+Quand tu as confirmé approve avec Account 1, tu as signé cette instruction :
+« J’autorise Account 2 à dépenser jusqu’à 50 de mes NF42. »
+
+-> Verifer que account2 peut bien utliser l autorisation donné par account1
+Dans metamask selectionner account2 Puis
+Dans write contract clique sur Connect Wallet puis confirmer dans metamask
+Transferer 10NF42 d account1 vers account2  avec transferFrom et value en 10^18
+S'assurer que account2 a des tBNB pour payer la transactions sinon demander a account1 de transferer des tBNB a account2
 
 
 
