@@ -786,14 +786,16 @@ Account 1 décide d’autoriser ; le contrat enregistre et applique sa décision
 Quand tu as confirmé approve avec Account 1, tu as signé cette instruction :
 « J’autorise Account 2 à dépenser jusqu’à 50 de mes NF42. »
 
--> Verifer que account2 peut bien utliser l autorisation donné par account1
+-> Verifier que account2 peut bien utliser l autorisation donné par account1
 Dans metamask selectionner account2 Puis
 Dans write contract clique sur Connect Wallet puis confirmer dans metamask
 Transferer 10NF42 d account1 vers account2  avec transferFrom et value en 10^18
 S'assurer que account2 a des tBNB pour payer la transactions sinon demander a account1 de transferer des tBNB a account2
 
+-> avec transferFrom : c'est le compte qui appelle la fonction qui paie le gas.
 
-
-
+Transfert de tBNB de account1 vers account2:
+-Selectionner account1 puis selectionner tBNB ensuite envoyer et remplir avec account2 et 0.001 tBNB
+Ensuite faire le transferFrom - confirmer - verifier le status success - verifier balanceOf (account2)
 
 
