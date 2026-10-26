@@ -798,4 +798,138 @@ Transfert de tBNB de account1 vers account2:
 -Selectionner account1 puis selectionner tBNB ensuite envoyer et remplir avec account2 et 0.001 tBNB
 Ensuite faire le transferFrom - confirmer - verifier le status success - verifier balanceOf (account2)
 
+------------------------
+Notions:
+Solidity = Langage dans lequel on écrit le contrat
+OpenZeppelin = Bibliothèque fournissant les fonctions ERC20
+Remix = Outil pour compiler, tester et préparer le déploiement
+MetaMask = Wallet qui gère mes comptes et signe les transactions
+BSC Testnet = Réseau qui stocke et exécute le contrat
+BscScan = Explorateur pour consulter le réseau et interagir avec le contrat
+Faucet = Site qui envoie gratuitement des tBNB de test
+
+Adresse du compte : identifie un détenteur, par exemple Account 1.
+Adresse du contrat : identifie le programme qui gère NF42.
+
+------------------------
+BONUS : Resumé
+
+Mon multisig est un coffre qui détient des NF42. Trois comptes sont autorisés à confirmer les transferts.
+Deux confirmations de comptes différents sont nécessaires avant qu’un propriétaire puisse exécuter l’envoi.
+Une personne seule ne peut donc pas sortir les tokens.
+
+BONUS — Déroulement complet du coffre MultiSig
+
+Principe : un coffre séparé détient des NF42. Trois comptes sont propriétaires
+du coffre et deux confirmations de propriétaires différents sont nécessaires
+pour faire sortir des tokens. Ils contrôlent le coffre, pas le contrat NF42.
+Le multisig ne crée aucun token : il utilise les NF42 déjà créés dans le mandatory.
+
+Les montants donnés aux fonctions sont en petites unités : 1 NF42 = 10^18 unités.
+
+1) Déployer le coffre
+
+Account 1 déploie MultiSig depuis Remix avec ces paramètres :
+tokenAddress = adresse du contrat NF42 déjà déployé
+ownersList = [adresse Account 1, adresse Account 2, adresse Account 3]
+required = 2
+
+Le constructeur vérifie que l'adresse du token n'est pas zéro, qu'il y a au
+moins un propriétaire, que les propriétaires sont différents et non nuls,
+et que le seuil est supérieur à zéro et ne dépasse pas leur nombre.
+Le code permet plusieurs configurations : nous choisissons ici 2 sur 3.
+
+Résultat : le coffre reçoit sa propre adresse et possède 0 NF42.
+Account 1 paie le gas du déploiement en tBNB.
+
+2) Déposer 50 NF42 dans le coffre
+
+Avec Account 1, appeler sur le CONTRAT NF42 :
+transfer(adresseDuMultisig, 50000000000000000000)
+
+Le contrat NF42 vérifie notamment qu'Account 1 possède assez de tokens.
+Account 1 perd 50 NF42 et le coffre reçoit 50 NF42.
+Aucun approve n'est nécessaire : Account 1 envoie ses propres tokens.
+
+3) Proposer d'envoyer 10 NF42 à Account 3
+
+Avec Account 2, appeler sur le CONTRAT MULTISIG :
+propose(adresseAccount3, 10000000000000000000)
+
+Le multisig vérifie qu'Account 2 est propriétaire, que le destinataire n'est
+pas l'adresse zéro et que le montant est supérieur à zéro.
+Il enregistre une proposition avec :
+to = adresse Account 3
+amount = 10 NF42 en petites unités
+confirmations = 0
+executed = false
+
+Aucun token ne bouge. Proposer ne compte pas comme confirmer.
+La première proposition porte le numéro txId = 0 ; les suivantes : 1, 2, etc.
+Pour la suite, utiliser le numéro réel de la proposition créée.
+
+4) Donner le premier accord
+
+Avec Account 1, appeler sur MultiSig :
+confirm(0)
+
+Le multisig vérifie qu'Account 1 est propriétaire, que la proposition existe,
+qu'elle n'est pas exécutée et qu'Account 1 ne l'a pas déjà confirmée.
+Résultat : une confirmation. Les 50 NF42 restent dans le coffre.
+
+À ce stade, execute(0) serait refusé : il manque une confirmation.
+Erreur attendue : Not enough confirmations.
+
+5) Donner le deuxième accord
+
+Avec Account 3, appeler sur MultiSig :
+confirm(0)
+
+Les mêmes vérifications sont effectuées pour Account 3.
+Résultat : deux confirmations. Aucun token ne bouge encore : confirmer
+n'exécute pas automatiquement le transfert.
+Account 3 peut confirmer même s'il est le destinataire : le code l'autorise.
+Account 2 aurait aussi pu confirmer sa propre proposition.
+
+6) Exécuter le transfert
+
+Avec Account 2, appeler sur MultiSig :
+execute(0)
+
+N'importe lequel des trois propriétaires aurait pu le faire.
+Le multisig vérifie que l'appelant est propriétaire, que la proposition
+existe, qu'elle n'a pas déjà été exécutée et qu'elle a au moins deux confirmations.
+
+Il marque la proposition comme exécutée, puis appelle lui-même sur NF42 :
+transfer(adresseAccount3, 10000000000000000000)
+
+L'expéditeur des tokens est cette fois le coffre, car c'est lui qui appelle
+transfer sur NF42. Le contrat NF42 vérifie son solde et effectue le transfert.
+Le réseau BSC Testnet exécute ces programmes et leurs vérifications.
+
+Si le transfert échoue, toute l'exécution est annulée, y compris le passage
+de executed à true. La proposition peut être réessayée après avoir corrigé
+la cause de l'échec, par exemple en déposant assez de NF42 dans le coffre.
+
+7) Vérifier le résultat
+
+Sur le CONTRAT NF42 :
+balanceOf(adresseDuMultisig) = 40 NF42 en petites unités
+balanceOf(adresseAccount3) = ancien solde + 10 NF42 en petites unités
+
+Sur le CONTRAT MULTISIG :
+transactions(0) : confirmations = 2 et executed = true
+
+Une seconde tentative de execute(0) est refusée.
+Une deuxième confirmation du même propriétaire est également refusée.
+
+Gas : à chaque étape d'écriture, le compte qui signe paie le gas en tBNB.
+Dans ce scénario, Account 1 paie le déploiement, le dépôt et sa confirmation.
+Account 2 paie la proposition et l'exécution. Account 3 paie sa confirmation.
+Le coffre n'a pas besoin de tBNB pour cet appel interne au contrat NF42 :
+le gas de l'appel interne est couvert par la transaction d'exécution.
+
+Dans BscScan, Read Contract permet de lire les soldes et les propositions.
+Write Contract permet d'appeler propose, confirm ou execute avec le bon
+compte connecté. Vérifier l'adresse connectée avant chaque opération.
 
