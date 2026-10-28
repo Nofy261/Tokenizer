@@ -804,8 +804,8 @@ Solidity = Langage dans lequel on écrit le contrat
 OpenZeppelin = Bibliothèque fournissant les fonctions ERC20
 Remix = Outil pour compiler, tester et préparer le déploiement
 MetaMask = Wallet qui gère mes comptes et signe les transactions
-BSC Testnet = Réseau qui stocke et exécute le contrat
-BscScan = Explorateur pour consulter le réseau et interagir avec le contrat
+BSC Testnet = Blockchain de test : un Réseau qui stocke et exécute le contrat et enregistre les transactions
+BscScan = Explorateur qui permet de consulter les infos enregistrées sur la blockchain
 Faucet = Site qui envoie gratuitement des tBNB de test
 
 Adresse du compte : identifie un détenteur, par exemple Account 1.
@@ -813,6 +813,17 @@ Adresse du contrat : identifie le programme qui gère NF42.
 
 ------------------------
 BONUS : Resumé
+
+Objectif du bonus:
+Mettre en place un coffre de NF42 dont aucun propriétaire ne peut sortir les tokens seul:
+1. Disposer de trois comptes distincts pour représenter les propriétaires.
+2. Déployer le coffre MultiSig, lié à mon token NF42, avec deux confirmations nécessaires sur trois.
+3. Déposer des NF42 dans le coffre.
+4. Prouver qu’une seule confirmation ne suffit pas pour effectuer un transfert.
+5. Réussir ce transfert avec deux confirmations et vérifier les soldes.
+6. Vérifier qu’un même propriétaire ne peut pas confirmer deux fois et qu’un transfert ne peut pas être exécuté deux fois.
+
+------
 
 Mon multisig est un coffre qui détient des NF42. Trois comptes sont autorisés à confirmer les transferts.
 Deux confirmations de comptes différents sont nécessaires avant qu’un propriétaire puisse exécuter l’envoi.
@@ -932,4 +943,6 @@ le gas de l'appel interne est couvert par la transaction d'exécution.
 Dans BscScan, Read Contract permet de lire les soldes et les propositions.
 Write Contract permet d'appeler propose, confirm ou execute avec le bon
 compte connecté. Vérifier l'adresse connectée avant chaque opération.
+
+----------------------
 
