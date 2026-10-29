@@ -946,3 +946,53 @@ compte connecté. Vérifier l'adresse connectée avant chaque opération.
 
 ----------------------
 
+Code Bonus:
+
+IERC20 public token -> variable qui indique au coffre quel token il doit utliser, ici le NF42
+address[] public owners -> tableau contenant les adresses des 3comptes qui controlent le coffre
+mapping(address => bool) public isOwner -> on creer une table vide pour le moment
+uint256 public requiredConfirmations -> on creer une variable indiquant le nombre de confirmations attendue
+struct Transaction {...} -> on definit le modele Transaction de fiche qui regroupe les infos d'un transfert proposée
+
+Transaction[] public transactions =>
+Je creer un tableau nommé transactions, dont chaque element sera uen fiche de type Transaction
+
+Transaction définit le modèle d’une fiche de proposition.
+transactions est le tableau qui range ces fiches.
+transactions[0] est la première fiche, transactions[1] la deuxième, etc.
+
+mapping(uint256 => mapping(address => bool)) public isConfirmed => une table à deux clés
+isConfirmed[0][adresseOwner]
+Cette table mémorise qui a confirmé chaque proposition, pour empêcher une même personne de confirmer deux fois
+
+Exemple : envoyer 100 NF42 du coffre à Account 3, avec 2 accords sur 3.
+1. Account 1 propose → proposition 0 créée
+   Account 1 → false
+   Account 2 → false
+   Account 3 → false
+   confirmations = 0
+   executed = false
+
+2. Account 1 confirme la proposition 0
+   Account 1 → true
+   Account 2 → false
+   Account 3 → false
+   confirmations = 1
+   executed = false
+
+3. On essaie d’exécuter
+   → Refus : il manque une confirmation
+
+4. Account 2 confirme la proposition 0
+   Account 1 → true
+   Account 2 → true
+   Account 3 → false
+   confirmations = 2
+   executed = false
+
+5. Un propriétaire exécute la proposition 0
+   → Le coffre envoie 100 NF42 à Account 3
+   executed = true
+
+   
+
