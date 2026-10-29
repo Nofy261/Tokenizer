@@ -964,6 +964,10 @@ transactions[0] est la première fiche, transactions[1] la deuxième, etc.
 mapping(uint256 => mapping(address => bool)) public isConfirmed => une table à deux clés
 isConfirmed[0][adresseOwner]
 Cette table mémorise qui a confirmé chaque proposition, pour empêcher une même personne de confirmer deux fois
+EX:
+Proposition 0 → Account 1 → true  : il a confirmé
+Proposition 0 → Account 2 → false : il n’a pas confirmé
+Proposition 1 → Account 1 → false : il n’a pas confirmé celle-ci
 
 Exemple : envoyer 100 NF42 du coffre à Account 3, avec 2 accords sur 3.
 1. Account 1 propose → proposition 0 créée
@@ -994,5 +998,60 @@ Exemple : envoyer 100 NF42 du coffre à Account 3, avec 2 accords sur 3.
    → Le coffre envoie 100 NF42 à Account 3
    executed = true
 
-   
+event TransactionProposed();event TransactionConfirmed();event TransactionExecuted(); =>
+on définit trois types d'annonces pour suivre les propositions,les confirmations et les executions.
+EX:
+propose() réussit
+→ emit TransactionProposed(...)
+→ annonce enregistrée sur la blockchain
+
+modifier onlyOwner() {} => On définit un modifier nommé onlyOwner(bloc de contrôle reutlisable)
+Cela verifie que celui qui appelle la focntion est proprietaire du coffre Sinon il bloque.
+
+Un compte appelle confirm(0)
+          ↓
+onlyOwner vérifie son adresse
+          ↓
+Propriétaire ?
+├─ Oui → on poursuit le contenu de confirm
+└─ Non → arrêt avec le message "Not an owner"
+
+constructor(address tokenAddress, address[] memory ownersList, uint256 required) =>
+le constructor configure le coffre une seule fois au deploiement et reçoit les 3donnees.
+Pour notre coffre :
+tokenAddress → contrat NF42
+ownersList   → Account 1, Account 2, Account 3
+required     → 2
+
+require sert a verifier une condition: Vrai on continue / Faux on arrete avec message
+
+require(tokenAddress != address(0), "Invalid token address"); =>
+Le constructeur verifie que l'adresse du token n'est pas l'adresse zéro
+
+require(ownersList.length > 0, "Owners required"); =>
+Le constructeur vérifie qu'il y au moins une adresse dans la liste des proprietaires sinon deploiement refusé avec Owners required.
+
+require(required > 0 && required <= ownersList.length, "Invalid number of required confirmations");=>
+On verifie que le required donné en parametre est plus grand que zero et plus petit ou = au nombre d'owners sinon deploiement refusé
+
+for (uint256 i = 0; i < ownersList.length; i++) {...} => 
+On parcours la liste des owners et on va les ajouter un par un tout en verifiant : 
+- l'adresse n'est pas = 0 
+- les adresses ne sont pas les memes sinon deploiement refusé
+
+En resumé le constucteur vérifie les parametres, puis enregistre le token, les proprietaires et le nombres de confirmations necessaires.
+
+propose(): creer une demande(fiche) de transfert et renvoie son numero
+Le premier appel réussi à propose() creer la fiche numero 0 et renvoie 0
+
+confirm(): reçoit le numero d'une proposition. Elle verifie que l'appelant est proprietaire, que la proposition existe,
+n'est pas executé et qu'il ne l'a pas deja confirmé. Puis enregistre son accord, augmente le compteur et emet un evenement.
+
+execute() reçoit le numéro d’une proposition. Elle vérifie que l’appelant est propriétaire, que la proposition existe,
+n’a pas déjà été exécutée et a assez de confirmations. Puis elle la marque exécutée, transfère les NF42 du coffre au destinataire et émet un événement.
+Si le transfert échoue, toute l’opération est annulée.
+
+
+
+
 
