@@ -1056,3 +1056,36 @@ Adresse du coffre deployé avec 0 NF42
 0xac0e161f238ec1d73d2dbbae3f713a79ff74933a
 
 D'abord envoyer des NF42 a ce coffre pour pouvoir faire les tests du bonus
+
+------------------------------
+ADRESSES UTILES — TESTS ET CORRECTION
+Réseau : BNB Smart Chain Testnet (Chain ID 97)
+Explorateur : https://testnet.bscscan.com
+
+Contrat NF42 utilisé par le coffre (token() du MultiSig) :
+0x45DE859Ab16f0c2d5ac49353f33018a6d31eeAAD
+https://testnet.bscscan.com/address/0x45DE859Ab16f0c2d5ac49353f33018a6d31eeAAD
+
+Coffre MultiSig déjà déployé (à charger dans Remix avec Add Contract) :
+0xac0e161f238ec1d73d2dbbae3f713a79ff74933a
+https://testnet.bscscan.com/address/0xac0e161f238ec1d73d2dbbae3f713a79ff74933a
+
+Account 1 — compte MetaMask qui a déployé NF42 :
+0x30E60e59368fe5bFB6AED7431980ed6366543b4d
+
+Account 2 — compte MetaMask destinataire de nos précédents tests :
+0xbdfa6E96cb5e01c07d27c1145f9B1d2C7fC1c2B5
+
+Account 3 — adresse à compléter depuis MetaMask (pas encore notée ici).
+Ne pas utiliser les adresses des anciens comptes de Remix VM sur le testnet.
+
+Ancien contrat NF42 — autre token avec le même symbole :
+0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754
+À distinguer du contrat NF42 utilisé par le coffre ci-dessus.
+
+Repères pour ne pas confondre les adresses :
+- Page du contrat NF42 : choisit le token que l'on consulte.
+- balanceOf(adresse du coffre ou d'un compte) : consulte le solde de cette adresse.
+- token() du MultiSig : retrouve l'adresse du token utilisé par le coffre.
+- owners(0), owners(1), owners(2) : retrouvent les propriétaires enregistrés.
+- Un nouveau déploiement crée une nouvelle adresse de contrat : adapter ces notes si nécessaire.
