@@ -6,8 +6,7 @@ Ce dossier explique comment le contrat `Nofy42Token` a été déployé sur le
 **BNB Smart Chain Testnet**, et comment le redéployer.
 
 Le déploiement se fait avec **Remix IDE** (pour compiler et déployer) et
-**MetaMask** (pour signer la transaction et payer le gas). Aucune installation
-locale n'est nécessaire.
+**MetaMask** (pour signer la transaction et payer le gas). Aucune installation locale n'est nécessaire.
 
 ---
 
@@ -15,9 +14,7 @@ locale n'est nécessaire.
 
 ### 1. MetaMask avec le réseau BSC Testnet
 
-Si MetaMask et le réseau sont déjà configurés, ne pas les recréer : vérifier
-les paramètres ci-dessous. Sinon, installer l'extension MetaMask, créer
-un portefeuille (ou importer un portefeuille existant), puis ajouter le réseau manuellement
+Si MetaMask et le réseau sont déjà configurés, ne pas les recréer : vérifier les paramètres ci-dessous. Sinon, installer l'extension MetaMask, créer un portefeuille (ou importer un portefeuille existant), puis ajouter le réseau manuellement
 (*Ajouter un réseau → Ajouter un réseau manuellement*) :
 
 - **Nom du réseau :** BNB Smart Chain Testnet
@@ -46,11 +43,6 @@ Environ `0.01 tBNB` suffit pour déployer le contrat et faire quelques transfert
    [`../code/nofy42.sol`](../code/nofy42.sol).
 
 Remix télécharge automatiquement l'import OpenZeppelin.
-
-**Version d'OpenZeppelin : à relever dans les dépendances du déploiement
-initial.** L'import actuel ne fixe aucune version. Pour reproduire ce
-déploiement, conserver les mêmes fichiers de dépendances et noter leur
-version exacte ; ne pas supposer que la dernière version est celle utilisée.
 
 ### 2. Compiler
 
@@ -101,15 +93,6 @@ et si le service de vérification est correctement configuré. La vérification
 n'est pas garantie : ouvrir la page de la nouvelle adresse sur BscScan et
 vérifier que l'onglet **Contract** affiche *Source Code Verified (Exact Match)*.
 
-S'il n'est pas vérifié :
-
-1. Dans Remix, clic droit sur `nofy42.sol` → **Flatten**. Cela crée
-   `nofy42_flattened.sol`, un seul fichier qui inclut le code d'OpenZeppelin.
-2. Ouvrir `https://testnet.bscscan.com/verifyContract?a=<ADRESSE_DU_CONTRAT>`
-3. Compiler type : *Solidity (Single file)*, version du compilateur et licence
-   selon les réglages indiqués en fin de document.
-4. Coller le code aplati, mettre Optimization sur *No* et EVM version sur
-   `osaka`, puis valider.
 
 ### 6. Ajouter le token dans MetaMask
 
@@ -142,10 +125,6 @@ Ces réglages doivent être repris à l'identique pour vérifier le contrat sur 
 - **Licence :** MIT
 
 ---
-
----
----
-
 
 > English version
 
@@ -194,11 +173,6 @@ About `0.01 tBNB` is enough to deploy the contract and make a few transfers.
    [`../code/nofy42.sol`](../code/nofy42.sol).
 
 Remix downloads the OpenZeppelin import automatically.
-
-**OpenZeppelin version: to be identified from the original deployment's
-dependencies.** The current import does not pin a version. To reproduce
-that deployment, keep the same dependency files and record their exact
-version; do not assume the latest version was the one used.
 
 ### 2. Compile
 
@@ -249,16 +223,6 @@ Explorers** is checked before clicking **Deploy** and the verification
 service is configured correctly. Verification is not guaranteed: open the
 new address on BscScan and check that the **Contract** tab shows
 *Source Code Verified (Exact Match)*.
-
-If it is not verified:
-
-1. In Remix, right-click `nofy42.sol` → **Flatten**. This creates
-   `nofy42_flattened.sol`, a single file including the OpenZeppelin code.
-2. Open `https://testnet.bscscan.com/verifyContract?a=<CONTRACT_ADDRESS>`
-3. Compiler type: *Solidity (Single file)*, compiler version and license from
-   the settings listed at the end of this document.
-4. Paste the flattened code, set Optimization to *No* and EVM version to
-   `osaka`, then submit.
 
 ### 6. Add the token to MetaMask
 

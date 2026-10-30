@@ -18,6 +18,43 @@ Les propriétaires du coffre n'ont aucun pouvoir sur le contrat NF42 : ils
 contrôlent seulement les tokens déposés dans le multisig. Les transferts
 ordinaires entre wallets restent inchangés.
 
+### Coffre déployé
+
+- **Réseau :** BNB Smart Chain Testnet (Chain ID `97`).
+- **Adresse du coffre :** `0xac0e161f238ec1d73d2dbbae3f713a79ff74933a`.
+- **Explorateur du coffre :** [Voir le MultiSig sur BscScan](https://testnet.bscscan.com/address/0xac0e161f238ec1d73d2dbbae3f713a79ff74933a).
+- **Code source du coffre :** vérifié sur BscScan (**Exact Match**).
+- **Token NF42 utilisé (`token()`) :** `0x45DE859Ab16f0c2d5ac49353f33018a6d31eeAAD`.
+- **Explorateur du token :** [Voir le NF42 utilisé par le coffre](https://testnet.bscscan.com/address/0x45DE859Ab16f0c2d5ac49353f33018a6d31eeAAD).
+- **Configuration choisie :** 3 propriétaires, 2 confirmations nécessaires.
+
+Ce NF42 est une nouvelle instance du contrat du projet, déployée pour les
+révisions. Il est distinct de l'ancien contrat
+`0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754` présenté dans la documentation
+principale, même si les deux tokens portent le même nom et le même symbole.
+Le coffre utilise uniquement le contrat indiqué par `token()`.
+
+**Pour alimenter le coffre, envoyer uniquement les NF42 de ce contrat.**
+Le code actuel ne possède aucune fonction pour récupérer d'autres tokens
+qui lui seraient envoyés par erreur.
+
+### Vérifications réalisées
+
+- Dans Remix VM : transfert après deux confirmations ; refus avec une seule
+  confirmation ; refus d'une confirmation en double, d'une seconde exécution,
+  d'un appel par un non-propriétaire, d'une proposition inexistante, d'un
+  montant nul et d'un destinataire nul ; refus pour solde insuffisant, puis
+  réussite de la même proposition après un nouveau dépôt.
+- Sur BSC Testnet : dépôt de NF42 dans le coffre, création de propositions,
+  confirmations par deux propriétaires distincts et exécutions réussies de
+  transferts de 30 NF42 vers Account 2, puis Account 3. Les soldes ont été
+  consultés sur le contrat NF42 et les numéros `txId` retrouvés dans les logs.
+- Code du coffre consulté sur BscScan avec la mention **Exact Match**.
+
+Les refus testés dans Remix VM ne sont pas présentés ici comme déjà retestés
+sur BSC Testnet. Les adresses des trois propriétaires du coffre déployé
+peuvent être consultées avec `owners(0)`, `owners(1)` et `owners(2)`.
+
 ### Fonctionnement
 
 1. Un utilisateur envoie des NF42 à l'adresse du coffre avec `transfer` sur
@@ -70,23 +107,20 @@ actions ; le transfert effectif émet aussi l'événement `Transfer` de NF42.
 - L'état `executed` est marqué avant l'appel au token pour empêcher une
   nouvelle exécution de la même proposition pendant cet appel.
 
-La liste des propriétaires et le seuil ne peuvent pas être modifiés après
-le déploiement. Si moins de deux propriétaires peuvent encore signer, les
-NF42 du coffre restent bloqués. Des comptes issus de la même phrase secrète
-permettent une démonstration, mais ne protègent pas contre le vol de cette
-phrase : elle donne accès à tous ces comptes.
 
 ### Mise en place et démonstration
 
-Le bonus est **en cours de préparation** : son adresse de déploiement et
-son lien BscScan restent à renseigner après déploiement et vérification.
-Les étapes suivantes décrivent la procédure à réaliser, pas des tests déjà
-validés.
+Les étapes suivantes permettent de reproduire la mise en place et une
+démonstration. Les montants de 200 et 100 NF42 sont des exemples : les
+résultats indiqués supposent un coffre initialement vide et un destinataire
+sans NF42 de ce contrat. Sur le coffre existant, comparer les soldes avant
+et après l'opération plutôt que supposer un solde initial nul.
 
 1. Charger `bonus/multisig.sol` dans Remix et compiler. Dans la Remix VM,
    utiliser l'adresse d'un token NF42 déployé dans cette même VM ; sur BSC
-   Testnet, utiliser l'adresse NF42 indiquée dans la
-   [documentation du token](../documentation/README.md).
+   Testnet, utiliser le contrat NF42 indiqué dans « Coffre déployé » ci-dessus.
+   La [documentation du token](../documentation/README.md) explique son
+   fonctionnement, mais son adresse historique correspond à l'autre instance.
 2. Déployer `MultiSig` avec l'adresse NF42, une liste de 3 adresses distinctes
    (`["adresse1", "adresse2", "adresse3"]`, à remplacer par les adresses
    choisies) et `required = 2`. Sur le testnet, chaque propriétaire doit avoir
@@ -107,7 +141,7 @@ validés.
    Montrer aussi le transfert NF42 sur l'explorateur pour la démonstration
    sur le testnet.
 
-Vérifications complémentaires à réaliser : confirmation en double, appel
+Vérifications complémentaires à reproduire pour tester les refus : confirmation en double, appel
 depuis un non-propriétaire, numéro de proposition inexistant, seconde
 exécution, destinataire nul, montant nul et solde du coffre insuffisant.
 Ces usages doivent être refusés.
@@ -133,6 +167,42 @@ addresses** and the value **`2`**.
 Vault owners have no special power over the NF42 contract: they control
 only the tokens deposited in the multisig. Ordinary wallet-to-wallet
 transfers remain unchanged.
+
+### Deployed vault
+
+- **Network:** BNB Smart Chain Testnet (Chain ID `97`).
+- **Vault address:** `0xac0e161f238ec1d73d2dbbae3f713a79ff74933a`.
+- **Vault explorer:** [View the MultiSig on BscScan](https://testnet.bscscan.com/address/0xac0e161f238ec1d73d2dbbae3f713a79ff74933a).
+- **Vault source code:** verified on BscScan (**Exact Match**).
+- **NF42 token used (`token()`):** `0x45DE859Ab16f0c2d5ac49353f33018a6d31eeAAD`.
+- **Token explorer:** [View the NF42 used by the vault](https://testnet.bscscan.com/address/0x45DE859Ab16f0c2d5ac49353f33018a6d31eeAAD).
+- **Chosen configuration:** 3 owners, 2 required confirmations.
+
+This NF42 is a new instance of the project's token contract, deployed for
+practice. It is separate from the original contract
+`0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754` described in the main
+documentation, even though both tokens have the same name and symbol.
+The vault uses only the contract returned by `token()`.
+
+**Fund the vault only with NF42 from this contract.** The current code has
+no function to recover other tokens sent to it by mistake.
+
+### Completed checks
+
+- In Remix VM: transfer after two confirmations; rejection with only one
+  confirmation; rejection of duplicate confirmation, second execution,
+  non-owner calls, nonexistent proposals, zero amounts and zero recipients;
+  insufficient-balance rejection followed by successful execution of the
+  same proposal after another deposit.
+- On BSC Testnet: NF42 deposits, proposal creation, confirmations from two
+  distinct owners and successful transfers of 30 NF42 to Account 2 and then
+  Account 3. Balances were read on the NF42 contract and proposal IDs `txId`
+  were located in the logs.
+- Vault source code viewed on BscScan with the **Exact Match** label.
+
+Rejection cases tested in Remix VM are not claimed here as already retested
+on BSC Testnet. The three deployed vault owners can be inspected with
+`owners(0)`, `owners(1)` and `owners(2)`.
 
 ### How it works
 
@@ -186,21 +256,19 @@ NF42's `Transfer` event.
 - The `executed` flag is set before calling the token to prevent another
   execution of the same proposal during that call.
 
-The owner list and threshold cannot be changed after deployment. If fewer
-than two owners can still sign, the vault's NF42 remain locked. Accounts
-derived from the same recovery phrase allow a demonstration but do not
-protect against theft of that phrase: it gives access to all those accounts.
-
 ### Setup and demonstration
 
-The bonus is **still being prepared**: its deployment address and BscScan
-link must be added after deployment and verification. The following steps
-describe the procedure to perform, rather than tests already completed.
+The following steps reproduce setup and a demonstration. The amounts of
+200 and 100 NF42 are examples: the stated results assume an initially empty
+vault and a recipient with no NF42 from this contract. On the existing
+vault, compare balances before and after rather than assuming zero initial
+balances.
 
 1. Load `bonus/multisig.sol` in Remix and compile. In the Remix VM, use the
    address of an NF42 token deployed in that same VM; on BSC Testnet, use
-   the NF42 address listed in the
-   [token documentation](../documentation/README.md).
+   the NF42 contract listed under “Deployed vault” above. The
+   [token documentation](../documentation/README.md) explains how it works,
+   but its historical address refers to the other instance.
 2. Deploy `MultiSig` with the NF42 address, a list of 3 distinct addresses
    (`["address1", "address2", "address3"]`, replaced with the chosen
    addresses) and `required = 2`. On the testnet, each owner needs tBNB
@@ -219,6 +287,6 @@ describe the procedure to perform, rather than tests already completed.
 8. Check `transactions(txId)`: 2 confirmations and `executed = true`.
    Also show the NF42 transfer on the explorer for the testnet demonstration.
 
-Additional checks to perform: duplicate confirmation, calls from a non-owner,
+Additional checks to repeat when testing rejections: duplicate confirmation, calls from a non-owner,
 nonexistent proposal ID, second execution, zero recipient, zero amount and
 insufficient vault balance. These uses must be rejected.

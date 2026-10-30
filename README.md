@@ -24,11 +24,9 @@ Le code source est vérifié et publié sur BscScan (*Exact Match*).
 
 ## Structure du repo
 
-| Dossier | Contenu |
-|---|---|
-| [`code/`](code/) | Le smart contract en Solidity : [`nofy42.sol`](code/nofy42.sol) |
-| [`deployment/`](deployment/) | Les étapes et les réglages pour déployer le token |
-| [`documentation/`](documentation/) | Le fonctionnement du token et son utilisation |
+- **[`code/`](code/) :** le smart contract en Solidity : [`nofy42.sol`](code/nofy42.sol).
+- **[`deployment/`](deployment/) :** les étapes et les réglages pour déployer le token.
+- **[`documentation/`](documentation/) :** le fonctionnement du token et son utilisation.
 
 ---
 
@@ -130,11 +128,9 @@ The source code is verified and published on BscScan (*Exact Match*).
 
 ## Repository structure
 
-| Folder | Content |
-|---|---|
-| [`code/`](code/) | The Solidity smart contract: [`nofy42.sol`](code/nofy42.sol) |
-| [`deployment/`](deployment/) | Steps and settings to deploy the token |
-| [`documentation/`](documentation/) | How the token works and how to use it |
+- **[`code/`](code/):** the Solidity smart contract: [`nofy42.sol`](code/nofy42.sol).
+- **[`deployment/`](deployment/):** steps and settings to deploy the token.
+- **[`documentation/`](documentation/):** how the token works and how to use it.
 
 ---
 

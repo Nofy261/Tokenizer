@@ -27,6 +27,12 @@ déploiement et l'utilisation d'un token sur une blockchain publique. Il n'a
 - **Explorateur :** [Voir le contrat sur BscScan](https://testnet.bscscan.com/address/0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754)
 - **Code source :** [nofy42.sol](../code/nofy42.sol)
 
+**Deux déploiements distincts :** le contrat initial est
+`0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754`. Le contrat utilisé pour les
+tests et le multisig est
+[`0x45DE859Ab16f0c2d5ac49353f33018a6d31eeAAD`](https://testnet.bscscan.com/address/0x45DE859Ab16f0c2d5ac49353f33018a6d31eeAAD).
+Les deux portent le même nom NF42, mais leurs soldes sont séparés.
+
 ---
 
 ## 2. Notions de base
@@ -247,6 +253,12 @@ testnet).
 - **Contract address:** `0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754`
 - **Explorer:** [View the contract on BscScan](https://testnet.bscscan.com/address/0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754)
 - **Source code:** [nofy42.sol](../code/nofy42.sol)
+
+**Two separate deployments:** the initial contract is
+`0x8B2EeC6F2937725e5feE787578aCA7E1eFec8754`. The contract used for tests
+and the multisig is
+[`0x45DE859Ab16f0c2d5ac49353f33018a6d31eeAAD`](https://testnet.bscscan.com/address/0x45DE859Ab16f0c2d5ac49353f33018a6d31eeAAD).
+Both use the same NF42 name, but their balances are separate.
 
 ---
 

@@ -1089,3 +1089,14 @@ Repères pour ne pas confondre les adresses :
 - token() du MultiSig : retrouve l'adresse du token utilisé par le coffre.
 - owners(0), owners(1), owners(2) : retrouvent les propriétaires enregistrés.
 - Un nouveau déploiement crée une nouvelle adresse de contrat : adapter ces notes si nécessaire.
+
+--------------
+
+_mint(..., 1_000_000)
+→ crée 1 million de petites unités, pas 1 million de NF42 = 1 000 000 ÷ 10¹⁸ = 0,000000000001 NF42.
+
+_mint(..., 1_000_000 × 10¹⁸)
+→ crée les petites unités correspondant à 1 million de NF42 
+
+Mon token utilise 18 décimales, donc 1 NF42 correspond à 10¹⁸ petites unités.
+_mint attend ces petites unités :d'ou la mutliplication du nombre de NF42 souhaité par 10¹⁸
